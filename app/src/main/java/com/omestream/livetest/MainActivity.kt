@@ -47,6 +47,12 @@ class MainActivity : Activity() {
     private lateinit var status: TextView
     private lateinit var loading: LinearLayout
     private lateinit var loadingText: TextView
+    private var interactiveMode = false
+    private var pageGeneration = 0
+    private var lastHttpError: Int? = null
+    private var webError = "none"
+    private var observedRequests = 0
+    private var lastManifestHost = "none"
     private var attempted = mutableSetOf<String>()
     private var player: ExoPlayer? = null
     private var selected: Candidate? = null
@@ -77,8 +83,10 @@ class MainActivity : Activity() {
                     val uri = request.url
                     val path = uri.path.orEmpty().lowercase()
                     val isMedia = uri.scheme == "https" &&
-                        (path.endsWith(".m3u8") ||
-                         path.endsWith(".mpd"))
+                        (path.endsWith(".m3u8") || path.endsWith(".mpd"))
+                    if (uri.scheme == "https" && uri.host != null) {
+                        observedRequests++
+                    }
 
                     if (isMedia && candidates.none {
                             it.url == uri.toString()
@@ -90,7 +98,8 @@ class MainActivity : Activity() {
                         candidates.add(candidate)
 
                         main.post {
-                            report("Manifest detected: " + uri.host)
+                            lastManifestHost = uri.host.orEmpty()
+                            report("Manifest detected: " + lastManifestHost)
                             if (player == null && !firstFrame) {
                                 selected = candidate
                                 attempted.add(candidate.url)
@@ -102,15 +111,39 @@ class MainActivity : Activity() {
                     return null
                 }
 
+                override fun onReceivedHttpError(
+                    view: WebView?, request: WebResourceRequest?,
+                    errorResponse: android.webkit.WebResourceResponse?
+                ) {
+                    val code = errorResponse?.statusCode ?: return
+                    if (code >= 400 && (request?.isForMainFrame == true || code == 401 || code == 403)) {
+                        main.post {
+                            lastHttpError = code
+                            report("Web HTTP=$code host=${request?.url?.host ?: "unknown"}")
+                        }
+                    }
+                }
+
+                override fun onReceivedError(
+                    view: WebView?, request: WebResourceRequest?,
+                    error: android.webkit.WebResourceError?
+                ) {
+                    if (request?.isForMainFrame == true) {
+                        main.post {
+                            webError = error?.errorCode?.toString() ?: "unknown"
+                            report("Page load error code=$webError")
+                        }
+                    }
+                }
+
                 override fun onPageFinished(
                     view: WebView?,
                     url: String?
                 ) {
                     report("Page loaded")
                     view?.evaluateJavascript(
-                        "(function(){document.querySelectorAll('video').forEach(function(v){v.muted=true;v.play().catch(function(){});});})();",
-                        null
-                    )
+                        "(function(){var v=document.querySelector('video');if(v){v.muted=true;v.play().catch(function(){});return 'video-found';}return 'no-video-element';})()"
+                    ) { result -> report("HTML video element: $result") }
                 }
             }
         }
@@ -167,7 +200,43 @@ class MainActivity : Activity() {
                     candidates.clear()
                     loading.visibility = View.VISIBLE
                     loadingText.text = "Se cauta sursa LIVE..."
+                    pageGeneration++
+                    lastHttpError = null
+                    observedRequests = 0
+                    webError = "none"
+                    interactiveMode = false
                     web.loadUrl(site)
+                }
+            })
+
+            addView(Button(this@MainActivity).apply {
+                text = "Deschide pagina pentru Play"
+                setOnClickListener {
+                    interactiveMode = true
+                    loading.visibility = View.GONE
+                    report("Interactive mode: user opened website")
+                }
+            })
+
+            addView(Button(this@MainActivity).apply {
+                text = "Diagnostic (fara tokenuri)"
+                setOnClickListener {
+                    val details = "Requests observed: $observedRequests\n" +
+                        "Manifests: ${candidates.size}\n" +
+                        "Last manifest host: $lastManifestHost\n" +
+                        "Web HTTP error: ${lastHttpError ?: "none"}\n" +
+                        "Web error: $webError\n" +
+                        "Player running: ${player != null}\n" +
+                        "First video frame: $firstFrame\n" +
+                        logLines.takeLast(10).joinToString("\n")
+                    AlertDialog.Builder(this@MainActivity)
+                        .setTitle("OME diagnostic")
+                        .setMessage(details)
+                        .setPositiveButton("Inchide", null)
+                        .setNeutralButton("Copiaza") { _, _ ->
+                            (getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager)
+                                .setPrimaryClip(ClipData.newPlainText("OME diagnostic", details))
+                        }.show()
                 }
             })
         }
@@ -183,7 +252,7 @@ class MainActivity : Activity() {
         main.postDelayed({
             if (!firstFrame && player == null) {
                 loadingText.text =
-                    "Sursa nu a fost detectata. Poti reincarca."
+                    "Nu exista manifest detectat. Deschide pagina pentru Play sau verifica diagnosticul."
             }
         }, 20000)
     }
@@ -299,7 +368,7 @@ class MainActivity : Activity() {
             stopPlayer()
             loading.visibility = View.VISIBLE
             loadingText.text =
-                "Nu s-a putut reda sursa. Incearca reincarcarea."
+                "Media3 nu poate reda sursa. Verifica diagnosticul."
         }
     }
 
