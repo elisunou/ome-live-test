@@ -1,0 +1,1300 @@
+[
+  {
+    "id": "rds:tv-a7",
+    "name": "a7 TV",
+    "category": "religioase",
+    "provider": "RDSLive",
+    "rdsPage": "https://rdslive.net/tv-a7/",
+    "logo": "https://rdslive.net/wp-content/uploads/2026/10/rdn-a7-tv-89f31-320x180.webp"
+  },
+  {
+    "id": "rds:tv-acasa-gold",
+    "name": "Acasă Gold",
+    "category": "generaliste",
+    "provider": "RDSLive",
+    "rdsPage": "https://rdslive.net/tv-acasa-gold/",
+    "logo": "https://rdslive.net/wp-content/uploads/2026/10/rdn-acasa-gold-hd-48a63-320x180.webp"
+  },
+  {
+    "id": "rds:tv-acasa-tv-hd",
+    "name": "Acasă TV",
+    "category": "generaliste",
+    "provider": "RDSLive",
+    "rdsPage": "https://rdslive.net/tv-acasa-tv-hd/",
+    "logo": "https://rdslive.net/wp-content/uploads/2026/10/rdn-acasa-tv-hd-8fdd4-320x180.webp"
+  },
+  {
+    "id": "rds:tv-agro-tv",
+    "name": "Agro TV",
+    "category": "diverse",
+    "provider": "RDSLive",
+    "rdsPage": "https://rdslive.net/tv-agro-tv/",
+    "logo": "https://rdslive.net/wp-content/uploads/2026/10/rdn-agro-tv-6731d-320x180.webp"
+  },
+  {
+    "id": "rds:tv-aleph",
+    "name": "Aleph News",
+    "category": "stiri",
+    "provider": "RDSLive",
+    "rdsPage": "https://rdslive.net/tv-aleph/",
+    "logo": "https://rdslive.net/wp-content/uploads/2026/10/rdn-aleph-news-0fa51-320x180.webp"
+  },
+  {
+    "id": "rds:tv-alfa-omega",
+    "name": "Alfa Omega TV",
+    "category": "religioase",
+    "provider": "RDSLive",
+    "rdsPage": "https://rdslive.net/tv-alfa-omega/",
+    "logo": "https://rdslive.net/wp-content/uploads/2026/10/rdn-alfa-omega-2e67a-320x180.webp"
+  },
+  {
+    "id": "rds:tv-amc",
+    "name": "AMC",
+    "category": "filme",
+    "provider": "RDSLive",
+    "rdsPage": "https://rdslive.net/tv-amc/",
+    "logo": "https://rdslive.net/wp-content/uploads/2026/10/rdn-amc-hd-e5325-320x180.webp"
+  },
+  {
+    "id": "rds:tv-angelus-tv",
+    "name": "Angelus TV",
+    "category": "religioase",
+    "provider": "RDSLive",
+    "rdsPage": "https://rdslive.net/tv-angelus-tv/",
+    "logo": "https://rdslive.net/wp-content/uploads/2026/10/rdn-angelus-tv-180eb-320x180.webp"
+  },
+  {
+    "id": "rds:antena1-hd-ro",
+    "name": "Antena 1",
+    "category": "generaliste",
+    "provider": "RDSLive",
+    "rdsPage": "https://rdslive.net/antena1-hd-ro/",
+    "logo": "https://rdslive.net/wp-content/uploads/2026/10/rdn-antena-1-hd-64aa3-320x180.webp"
+  },
+  {
+    "id": "rds:antena-3-hd-ro",
+    "name": "Antena 3 CNN",
+    "category": "stiri",
+    "provider": "RDSLive",
+    "rdsPage": "https://rdslive.net/antena-3-hd-ro/",
+    "logo": "https://rdslive.net/wp-content/uploads/2026/10/rdn-antena-3-hd-57995-320x180.webp"
+  },
+  {
+    "id": "rds:tv-antena-stars",
+    "name": "Antena Stars",
+    "category": "generaliste",
+    "provider": "RDSLive",
+    "rdsPage": "https://rdslive.net/tv-antena-stars/"
+  },
+  {
+    "id": "rds:tv-atomic-academy-tv",
+    "name": "Atomic Academy TV",
+    "category": "muzica",
+    "provider": "RDSLive",
+    "rdsPage": "https://rdslive.net/tv-atomic-academy-tv/"
+  },
+  {
+    "id": "rds:tv-atomic",
+    "name": "Atomic TV",
+    "category": "muzica",
+    "provider": "RDSLive",
+    "rdsPage": "https://rdslive.net/tv-atomic/"
+  },
+  {
+    "id": "rds:tv-axn",
+    "name": "AXN",
+    "category": "filme",
+    "provider": "RDSLive",
+    "rdsPage": "https://rdslive.net/tv-axn/"
+  },
+  {
+    "id": "rds:tv-axn-black",
+    "name": "AXN Black",
+    "category": "filme",
+    "provider": "RDSLive",
+    "rdsPage": "https://rdslive.net/tv-axn-black/"
+  },
+  {
+    "id": "rds:tv-axn-spin",
+    "name": "AXN Spin",
+    "category": "filme",
+    "provider": "RDSLive",
+    "rdsPage": "https://rdslive.net/tv-axn-spin/"
+  },
+  {
+    "id": "rds:tv-axn-white",
+    "name": "AXN White",
+    "category": "filme",
+    "provider": "RDSLive",
+    "rdsPage": "https://rdslive.net/tv-axn-white/"
+  },
+  {
+    "id": "rds:tv-b1tv",
+    "name": "B1 TV",
+    "category": "stiri",
+    "provider": "RDSLive",
+    "rdsPage": "https://rdslive.net/tv-b1tv/"
+  },
+  {
+    "id": "rds:tv-balcan-music-tv",
+    "name": "Balcan Music TV",
+    "category": "muzica",
+    "provider": "RDSLive",
+    "rdsPage": "https://rdslive.net/tv-balcan-music-tv/"
+  },
+  {
+    "id": "rds:banat-tv",
+    "name": "Banat TV",
+    "category": "regionale",
+    "provider": "RDSLive",
+    "rdsPage": "https://rdslive.net/banat-tv/"
+  },
+  {
+    "id": "rds:tv-bbc-earth",
+    "name": "BBC Earth",
+    "category": "documentare",
+    "provider": "RDSLive",
+    "rdsPage": "https://rdslive.net/tv-bbc-earth/"
+  },
+  {
+    "id": "rds:tv-bbc-first-hd",
+    "name": "BBC First",
+    "category": "filme",
+    "provider": "RDSLive",
+    "rdsPage": "https://rdslive.net/tv-bbc-first-hd/"
+  },
+  {
+    "id": "rds:tv-bbc-world-news",
+    "name": "BBC News",
+    "category": "stiri",
+    "provider": "RDSLive",
+    "rdsPage": "https://rdslive.net/tv-bbc-world-news/"
+  },
+  {
+    "id": "rds:beauty-on",
+    "name": "Beauty ON",
+    "category": "diverse",
+    "provider": "RDSLive",
+    "rdsPage": "https://rdslive.net/beauty-on/"
+  },
+  {
+    "id": "rds:tv-bollywood-clasic-hd",
+    "name": "Bollywood Clasic",
+    "category": "filme",
+    "provider": "RDSLive",
+    "rdsPage": "https://rdslive.net/tv-bollywood-clasic-hd/"
+  },
+  {
+    "id": "rds:tv-ca-tine",
+    "name": "Ca Tine",
+    "category": "diverse",
+    "provider": "RDSLive",
+    "rdsPage": "https://rdslive.net/tv-ca-tine/"
+  },
+  {
+    "id": "rds:tv-cartoon-network",
+    "name": "Cartoon Network",
+    "category": "copii",
+    "provider": "RDSLive",
+    "rdsPage": "https://rdslive.net/tv-cartoon-network/"
+  },
+  {
+    "id": "rds:tv-boomerang",
+    "name": "Cartoonito",
+    "category": "copii",
+    "provider": "RDSLive",
+    "rdsPage": "https://rdslive.net/tv-boomerang/"
+  },
+  {
+    "id": "rds:chefi-ro",
+    "name": "Chefi RO",
+    "category": "diverse",
+    "provider": "RDSLive",
+    "rdsPage": "https://rdslive.net/chefi-ro/"
+  },
+  {
+    "id": "rds:tv-cinemaraton-hd",
+    "name": "Cinemaraton",
+    "category": "filme",
+    "provider": "RDSLive",
+    "rdsPage": "https://rdslive.net/tv-cinemaraton-hd/"
+  },
+  {
+    "id": "rds:cinemaraton-plus",
+    "name": "Cinemaraton Plus",
+    "category": "filme",
+    "provider": "RDSLive",
+    "rdsPage": "https://rdslive.net/cinemaraton-plus/"
+  },
+  {
+    "id": "rds:tv-cinemax-hd",
+    "name": "Cinemax",
+    "category": "filme",
+    "provider": "RDSLive",
+    "rdsPage": "https://rdslive.net/tv-cinemax-hd/"
+  },
+  {
+    "id": "rds:tv-cinemax-2",
+    "name": "Cinemax 2",
+    "category": "filme",
+    "provider": "RDSLive",
+    "rdsPage": "https://rdslive.net/tv-cinemax-2/"
+  },
+  {
+    "id": "rds:tv-bollywood-tv",
+    "name": "CineWOW",
+    "category": "filme",
+    "provider": "RDSLive",
+    "rdsPage": "https://rdslive.net/tv-bollywood-tv/"
+  },
+  {
+    "id": "rds:tv-cnn",
+    "name": "CNN International",
+    "category": "stiri",
+    "provider": "RDSLive",
+    "rdsPage": "https://rdslive.net/tv-cnn/"
+  },
+  {
+    "id": "rds:tv-comedy-central",
+    "name": "Comedy Central",
+    "category": "filme",
+    "provider": "RDSLive",
+    "rdsPage": "https://rdslive.net/tv-comedy-central/"
+  },
+  {
+    "id": "rds:comedy-play",
+    "name": "Comedy Play",
+    "category": "filme",
+    "provider": "RDSLive",
+    "rdsPage": "https://rdslive.net/comedy-play/"
+  },
+  {
+    "id": "rds:tv-credo-tv",
+    "name": "Credo TV",
+    "category": "religioase",
+    "provider": "RDSLive",
+    "rdsPage": "https://rdslive.net/tv-credo-tv/"
+  },
+  {
+    "id": "rds:tv-davinci",
+    "name": "Da Vinci",
+    "category": "documentare",
+    "provider": "RDSLive",
+    "rdsPage": "https://rdslive.net/tv-davinci/"
+  },
+  {
+    "id": "rds:desene-cu-bluey",
+    "name": "Desene cu Bluey",
+    "category": "copii",
+    "provider": "RDSLive",
+    "rdsPage": "https://rdslive.net/desene-cu-bluey/"
+  },
+  {
+    "id": "rds:desene-cu-eroii-in-pijama",
+    "name": "Desene cu Eroii in Pijama",
+    "category": "copii",
+    "provider": "RDSLive",
+    "rdsPage": "https://rdslive.net/desene-cu-eroii-in-pijama/"
+  },
+  {
+    "id": "rds:desene-cu-grizzy-lemmings",
+    "name": "Desene cu Grizzy & Lemmings",
+    "category": "copii",
+    "provider": "RDSLive",
+    "rdsPage": "https://rdslive.net/desene-cu-grizzy-lemmings/"
+  },
+  {
+    "id": "rds:desene-cu-mickey",
+    "name": "Desene cu Mickey",
+    "category": "copii",
+    "provider": "RDSLive",
+    "rdsPage": "https://rdslive.net/desene-cu-mickey/"
+  },
+  {
+    "id": "rds:desene-cu-patrula-catelusilor",
+    "name": "Desene cu Patrula Catelusilor",
+    "category": "copii",
+    "provider": "RDSLive",
+    "rdsPage": "https://rdslive.net/desene-cu-patrula-catelusilor/"
+  },
+  {
+    "id": "rds:desene-cu-peppa-pig",
+    "name": "Desene cu Peppa Pig",
+    "category": "copii",
+    "provider": "RDSLive",
+    "rdsPage": "https://rdslive.net/desene-cu-peppa-pig/"
+  },
+  {
+    "id": "rds:tv-deutsche-welle",
+    "name": "Deutsche Welle",
+    "category": "stiri",
+    "provider": "RDSLive",
+    "rdsPage": "https://rdslive.net/tv-deutsche-welle/"
+  },
+  {
+    "id": "rds:digi-animal-world",
+    "name": "Digi Animal World",
+    "category": "documentare",
+    "provider": "RDSLive",
+    "rdsPage": "https://rdslive.net/digi-animal-world/"
+  },
+  {
+    "id": "rds:digi-life-ro1",
+    "name": "Digi Life",
+    "category": "documentare",
+    "provider": "RDSLive",
+    "rdsPage": "https://rdslive.net/digi-life-ro1/"
+  },
+  {
+    "id": "rds:digisport",
+    "name": "Digi Sport 1",
+    "category": "sport",
+    "provider": "RDSLive",
+    "rdsPage": "https://rdslive.net/digisport/"
+  },
+  {
+    "id": "rds:digisport-2-hd-ro4",
+    "name": "Digi Sport 2",
+    "category": "sport",
+    "provider": "RDSLive",
+    "rdsPage": "https://rdslive.net/digisport-2-hd-ro4/"
+  },
+  {
+    "id": "rds:digisport3hd-ro",
+    "name": "Digi Sport 3",
+    "category": "sport",
+    "provider": "RDSLive",
+    "rdsPage": "https://rdslive.net/digisport3hd-ro/"
+  },
+  {
+    "id": "rds:digisport-4-hd-ro4",
+    "name": "Digi Sport 4",
+    "category": "sport",
+    "provider": "RDSLive",
+    "rdsPage": "https://rdslive.net/digisport-4-hd-ro4/"
+  },
+  {
+    "id": "rds:digi-world",
+    "name": "Digi World",
+    "category": "documentare",
+    "provider": "RDSLive",
+    "rdsPage": "https://rdslive.net/digi-world/"
+  },
+  {
+    "id": "rds:digi24-hd",
+    "name": "Digi24",
+    "category": "stiri",
+    "provider": "RDSLive",
+    "rdsPage": "https://rdslive.net/digi24-hd/"
+  },
+  {
+    "id": "rds:tv-discovery-channel",
+    "name": "Discovery Channel",
+    "category": "documentare",
+    "provider": "RDSLive",
+    "rdsPage": "https://rdslive.net/tv-discovery-channel/"
+  },
+  {
+    "id": "rds:tv-disney-channel",
+    "name": "Disney Channel",
+    "category": "copii",
+    "provider": "RDSLive",
+    "rdsPage": "https://rdslive.net/tv-disney-channel/"
+  },
+  {
+    "id": "rds:tv-disney-junior",
+    "name": "Disney Junior",
+    "category": "copii",
+    "provider": "RDSLive",
+    "rdsPage": "https://rdslive.net/tv-disney-junior/"
+  },
+  {
+    "id": "rds:tv-diva",
+    "name": "Diva",
+    "category": "filme",
+    "provider": "RDSLive",
+    "rdsPage": "https://rdslive.net/tv-diva/"
+  },
+  {
+    "id": "rds:tv-duck-tv",
+    "name": "Duck TV",
+    "category": "copii",
+    "provider": "RDSLive",
+    "rdsPage": "https://rdslive.net/tv-duck-tv/"
+  },
+  {
+    "id": "rds:tv-e-entertainment",
+    "name": "E! Entertainment",
+    "category": "diverse",
+    "provider": "RDSLive",
+    "rdsPage": "https://rdslive.net/tv-e-entertainment/"
+  },
+  {
+    "id": "rds:emi-tv",
+    "name": "Emi TV",
+    "category": "muzica",
+    "provider": "RDSLive",
+    "rdsPage": "https://rdslive.net/emi-tv/"
+  },
+  {
+    "id": "rds:tv-epicdrama",
+    "name": "Epic Drama",
+    "category": "filme",
+    "provider": "RDSLive",
+    "rdsPage": "https://rdslive.net/tv-epicdrama/"
+  },
+  {
+    "id": "rds:tv-etnotv-hd",
+    "name": "Etno TV",
+    "category": "muzica",
+    "provider": "RDSLive",
+    "rdsPage": "https://rdslive.net/tv-etnotv-hd/"
+  },
+  {
+    "id": "rds:tv-euronews-romania",
+    "name": "Euronews România",
+    "category": "stiri",
+    "provider": "RDSLive",
+    "rdsPage": "https://rdslive.net/tv-euronews-romania/"
+  },
+  {
+    "id": "rds:eurosport-1-tv",
+    "name": "Eurosport 1",
+    "category": "sport",
+    "provider": "RDSLive",
+    "rdsPage": "https://rdslive.net/eurosport-1-tv/"
+  },
+  {
+    "id": "rds:eurosport-2-hd-tv",
+    "name": "Eurosport 2",
+    "category": "sport",
+    "provider": "RDSLive",
+    "rdsPage": "https://rdslive.net/eurosport-2-hd-tv/"
+  },
+  {
+    "id": "rds:tv-fashion-tv",
+    "name": "Fashion TV",
+    "category": "diverse",
+    "provider": "RDSLive",
+    "rdsPage": "https://rdslive.net/tv-fashion-tv/"
+  },
+  {
+    "id": "rds:tv-favorit-tv",
+    "name": "Favorit TV",
+    "category": "muzica",
+    "provider": "RDSLive",
+    "rdsPage": "https://rdslive.net/tv-favorit-tv/"
+  },
+  {
+    "id": "rds:tv-film-cafe",
+    "name": "Film Cafe",
+    "category": "filme",
+    "provider": "RDSLive",
+    "rdsPage": "https://rdslive.net/tv-film-cafe/"
+  },
+  {
+    "id": "rds:film-mania",
+    "name": "Film Mania",
+    "category": "filme",
+    "provider": "RDSLive",
+    "rdsPage": "https://rdslive.net/film-mania/"
+  },
+  {
+    "id": "rds:tv-film-now",
+    "name": "Film Now",
+    "category": "filme",
+    "provider": "RDSLive",
+    "rdsPage": "https://rdslive.net/tv-film-now/"
+  },
+  {
+    "id": "rds:filme-bollywood",
+    "name": "Filme Bollywood – selecție internă",
+    "category": "filme",
+    "provider": "RDSLive",
+    "rdsPage": "https://rdslive.net/filme-bollywood/"
+  },
+  {
+    "id": "rds:filme-angelina-jolie",
+    "name": "Filme cu Angelina Jolie – selecție tematică",
+    "category": "filme",
+    "provider": "RDSLive",
+    "rdsPage": "https://rdslive.net/filme-angelina-jolie/"
+  },
+  {
+    "id": "rds:filme-brad-pitt",
+    "name": "Filme cu Brad Pitt – rotație și selecție",
+    "category": "filme",
+    "provider": "RDSLive",
+    "rdsPage": "https://rdslive.net/filme-brad-pitt/"
+  },
+  {
+    "id": "rds:filme-jason-statham",
+    "name": "Filme cu Jason Statham – selecție",
+    "category": "filme",
+    "provider": "RDSLive",
+    "rdsPage": "https://rdslive.net/filme-jason-statham/"
+  },
+  {
+    "id": "rds:filme-john-travolta",
+    "name": "Filme cu John Travolta – titluri în rotație",
+    "category": "filme",
+    "provider": "RDSLive",
+    "rdsPage": "https://rdslive.net/filme-john-travolta/"
+  },
+  {
+    "id": "rds:filme-stalone",
+    "name": "Filme cu Sylvester Stallone – selecție",
+    "category": "filme",
+    "provider": "RDSLive",
+    "rdsPage": "https://rdslive.net/filme-stalone/"
+  },
+  {
+    "id": "rds:filme-tom-cruise",
+    "name": "Filme cu Tom Cruise",
+    "category": "filme",
+    "provider": "RDSLive",
+    "rdsPage": "https://rdslive.net/filme-tom-cruise/"
+  },
+  {
+    "id": "rds:filme-actiune",
+    "name": "Filme de acțiune",
+    "category": "filme",
+    "provider": "RDSLive",
+    "rdsPage": "https://rdslive.net/filme-actiune/"
+  },
+  {
+    "id": "rds:filme-comedie",
+    "name": "Filme de comedie",
+    "category": "filme",
+    "provider": "RDSLive",
+    "rdsPage": "https://rdslive.net/filme-comedie/"
+  },
+  {
+    "id": "rds:filme-craciun",
+    "name": "Filme de Crăciun",
+    "category": "filme",
+    "provider": "RDSLive",
+    "rdsPage": "https://rdslive.net/filme-craciun/"
+  },
+  {
+    "id": "rds:filme-razboi",
+    "name": "Filme de război",
+    "category": "filme",
+    "provider": "RDSLive",
+    "rdsPage": "https://rdslive.net/filme-razboi/"
+  },
+  {
+    "id": "rds:filme-fantasy",
+    "name": "Filme fantasy",
+    "category": "filme",
+    "provider": "RDSLive",
+    "rdsPage": "https://rdslive.net/filme-fantasy/"
+  },
+  {
+    "id": "rds:filme-horror",
+    "name": "Filme horror – selecție și rotație",
+    "category": "filme",
+    "provider": "RDSLive",
+    "rdsPage": "https://rdslive.net/filme-horror/"
+  },
+  {
+    "id": "rds:filme-premiere",
+    "name": "Filme noi",
+    "category": "filme",
+    "provider": "RDSLive",
+    "rdsPage": "https://rdslive.net/filme-premiere/"
+  },
+  {
+    "id": "rds:filme-romanesti",
+    "name": "Filme românești – selecție în rotație",
+    "category": "filme",
+    "provider": "RDSLive",
+    "rdsPage": "https://rdslive.net/filme-romanesti/"
+  },
+  {
+    "id": "rds:filme-sci-fi",
+    "name": "Filme SF – selecție în rotație",
+    "category": "filme",
+    "provider": "RDSLive",
+    "rdsPage": "https://rdslive.net/filme-sci-fi/"
+  },
+  {
+    "id": "rds:filme-thriller",
+    "name": "Filme thriller – selecție tematică",
+    "category": "filme",
+    "provider": "RDSLive",
+    "rdsPage": "https://rdslive.net/filme-thriller/"
+  },
+  {
+    "id": "rds:filme-western",
+    "name": "Filme western – selecție tematică",
+    "category": "filme",
+    "provider": "RDSLive",
+    "rdsPage": "https://rdslive.net/filme-western/"
+  },
+  {
+    "id": "rds:tv-fishing-and-hunting",
+    "name": "Fishing & Hunting",
+    "category": "diverse",
+    "provider": "RDSLive",
+    "rdsPage": "https://rdslive.net/tv-fishing-and-hunting/"
+  },
+  {
+    "id": "rds:tv-food-network-hd",
+    "name": "Food Network",
+    "category": "documentare",
+    "provider": "RDSLive",
+    "rdsPage": "https://rdslive.net/tv-food-network-hd/"
+  },
+  {
+    "id": "rds:tv-happy-channel",
+    "name": "Happy Channel",
+    "category": "generaliste",
+    "provider": "RDSLive",
+    "rdsPage": "https://rdslive.net/tv-happy-channel/"
+  },
+  {
+    "id": "rds:tv-hbo-hd",
+    "name": "HBO",
+    "category": "filme",
+    "provider": "RDSLive",
+    "rdsPage": "https://rdslive.net/tv-hbo-hd/"
+  },
+  {
+    "id": "rds:tv-hbo-2-hd",
+    "name": "HBO 2",
+    "category": "filme",
+    "provider": "RDSLive",
+    "rdsPage": "https://rdslive.net/tv-hbo-2-hd/"
+  },
+  {
+    "id": "rds:tv-hbo-3-hd",
+    "name": "HBO 3",
+    "category": "filme",
+    "provider": "RDSLive",
+    "rdsPage": "https://rdslive.net/tv-hbo-3-hd/"
+  },
+  {
+    "id": "rds:tv-hd365",
+    "name": "HD365",
+    "category": "diverse",
+    "provider": "RDSLive",
+    "rdsPage": "https://rdslive.net/tv-hd365/"
+  },
+  {
+    "id": "rds:tv-hgtv",
+    "name": "HGTV",
+    "category": "diverse",
+    "provider": "RDSLive",
+    "rdsPage": "https://rdslive.net/tv-hgtv/"
+  },
+  {
+    "id": "rds:tv-history-channel",
+    "name": "History Channel",
+    "category": "documentare",
+    "provider": "RDSLive",
+    "rdsPage": "https://rdslive.net/tv-history-channel/"
+  },
+  {
+    "id": "rds:hit-music-channel-2",
+    "name": "Hit Music Channel",
+    "category": "muzica",
+    "provider": "RDSLive",
+    "rdsPage": "https://rdslive.net/hit-music-channel-2/"
+  },
+  {
+    "id": "rds:tv-impact-tv-dance",
+    "name": "Impact TV Dance",
+    "category": "muzica",
+    "provider": "RDSLive",
+    "rdsPage": "https://rdslive.net/tv-impact-tv-dance/"
+  },
+  {
+    "id": "rds:tv-impact-tv-manele",
+    "name": "Impact TV Manele",
+    "category": "muzica",
+    "provider": "RDSLive",
+    "rdsPage": "https://rdslive.net/tv-impact-tv-manele/"
+  },
+  {
+    "id": "rds:inedit-tv",
+    "name": "Inedit TV",
+    "category": "muzica",
+    "provider": "RDSLive",
+    "rdsPage": "https://rdslive.net/inedit-tv/"
+  },
+  {
+    "id": "rds:tv-jim-jam",
+    "name": "JimJam",
+    "category": "copii",
+    "provider": "RDSLive",
+    "rdsPage": "https://rdslive.net/tv-jim-jam/"
+  },
+  {
+    "id": "rds:tv-job-tv",
+    "name": "Job TV",
+    "category": "diverse",
+    "provider": "RDSLive",
+    "rdsPage": "https://rdslive.net/tv-job-tv/"
+  },
+  {
+    "id": "rds:kanald-romania",
+    "name": "Kanal D",
+    "category": "generaliste",
+    "provider": "RDSLive",
+    "rdsPage": "https://rdslive.net/kanald-romania/"
+  },
+  {
+    "id": "rds:tv-kanald2",
+    "name": "Kanal D2",
+    "category": "generaliste",
+    "provider": "RDSLive",
+    "rdsPage": "https://rdslive.net/tv-kanald2/"
+  },
+  {
+    "id": "rds:kids-mania",
+    "name": "Kids Mania",
+    "category": "copii",
+    "provider": "RDSLive",
+    "rdsPage": "https://rdslive.net/kids-mania/"
+  },
+  {
+    "id": "rds:tv-kiss-tv",
+    "name": "Kiss TV",
+    "category": "muzica",
+    "provider": "RDSLive",
+    "rdsPage": "https://rdslive.net/tv-kiss-tv/"
+  },
+  {
+    "id": "rds:las-fierbinti",
+    "name": "Las Fierbinți – episoade în rotație",
+    "category": "filme",
+    "provider": "RDSLive",
+    "rdsPage": "https://rdslive.net/las-fierbinti/"
+  },
+  {
+    "id": "rds:light-channel",
+    "name": "Light Channel",
+    "category": "religioase",
+    "provider": "RDSLive",
+    "rdsPage": "https://rdslive.net/light-channel/"
+  },
+  {
+    "id": "rds:m1",
+    "name": "M1",
+    "category": "stiri",
+    "provider": "RDSLive",
+    "rdsPage": "https://rdslive.net/m1/"
+  },
+  {
+    "id": "rds:tv-magic-tv",
+    "name": "Magic TV",
+    "category": "muzica",
+    "provider": "RDSLive",
+    "rdsPage": "https://rdslive.net/tv-magic-tv/"
+  },
+  {
+    "id": "rds:maria-tv",
+    "name": "Maria TV",
+    "category": "religioase",
+    "provider": "RDSLive",
+    "rdsPage": "https://rdslive.net/maria-tv/"
+  },
+  {
+    "id": "rds:tv-metropola-tv",
+    "name": "Metropola TV",
+    "category": "generaliste",
+    "provider": "RDSLive",
+    "rdsPage": "https://rdslive.net/tv-metropola-tv/"
+  },
+  {
+    "id": "rds:tv-mezzo-ro",
+    "name": "Mezzo",
+    "category": "muzica",
+    "provider": "RDSLive",
+    "rdsPage": "https://rdslive.net/tv-mezzo-ro/"
+  },
+  {
+    "id": "rds:tv-minimax",
+    "name": "Minimax",
+    "category": "copii",
+    "provider": "RDSLive",
+    "rdsPage": "https://rdslive.net/tv-minimax/"
+  },
+  {
+    "id": "rds:tv-mireasa-tv",
+    "name": "Mireasa TV",
+    "category": "diverse",
+    "provider": "RDSLive",
+    "rdsPage": "https://rdslive.net/tv-mireasa-tv/"
+  },
+  {
+    "id": "rds:tv-moldova-tv",
+    "name": "Moldova TV",
+    "category": "diverse",
+    "provider": "RDSLive",
+    "rdsPage": "https://rdslive.net/tv-moldova-tv/"
+  },
+  {
+    "id": "rds:tv-mtv",
+    "name": "MTV Global",
+    "category": "muzica",
+    "provider": "RDSLive",
+    "rdsPage": "https://rdslive.net/tv-mtv/"
+  },
+  {
+    "id": "rds:music-channel",
+    "name": "Music Channel",
+    "category": "muzica",
+    "provider": "RDSLive",
+    "rdsPage": "https://rdslive.net/music-channel/"
+  },
+  {
+    "id": "rds:tv-nasul-tv-ro",
+    "name": "Nașul TV",
+    "category": "stiri",
+    "provider": "RDSLive",
+    "rdsPage": "https://rdslive.net/tv-nasul-tv-ro/"
+  },
+  {
+    "id": "rds:tv-national-plus-24",
+    "name": "Național 24 Plus",
+    "category": "generaliste",
+    "provider": "RDSLive",
+    "rdsPage": "https://rdslive.net/tv-national-plus-24/"
+  },
+  {
+    "id": "rds:tv-national-geographic",
+    "name": "National Geographic",
+    "category": "documentare",
+    "provider": "RDSLive",
+    "rdsPage": "https://rdslive.net/tv-national-geographic/"
+  },
+  {
+    "id": "rds:tv-national-geographic-wild",
+    "name": "National Geographic Wild",
+    "category": "documentare",
+    "provider": "RDSLive",
+    "rdsPage": "https://rdslive.net/tv-national-geographic-wild/"
+  },
+  {
+    "id": "rds:tv-national-tv",
+    "name": "Național TV",
+    "category": "generaliste",
+    "provider": "RDSLive",
+    "rdsPage": "https://rdslive.net/tv-national-tv/"
+  },
+  {
+    "id": "rds:national-tv-2",
+    "name": "National TV 2",
+    "category": "generaliste",
+    "provider": "RDSLive",
+    "rdsPage": "https://rdslive.net/national-tv-2/"
+  },
+  {
+    "id": "rds:tv-nick-jr",
+    "name": "Nick Jr.",
+    "category": "copii",
+    "provider": "RDSLive",
+    "rdsPage": "https://rdslive.net/tv-nick-jr/"
+  },
+  {
+    "id": "rds:tv-nickelodeon",
+    "name": "Nickelodeon",
+    "category": "copii",
+    "provider": "RDSLive",
+    "rdsPage": "https://rdslive.net/tv-nickelodeon/"
+  },
+  {
+    "id": "rds:tv-nick-toons",
+    "name": "Nicktoons",
+    "category": "copii",
+    "provider": "RDSLive",
+    "rdsPage": "https://rdslive.net/tv-nick-toons/"
+  },
+  {
+    "id": "rds:nostalgia-tv",
+    "name": "Nostalgia TV",
+    "category": "filme",
+    "provider": "RDSLive",
+    "rdsPage": "https://rdslive.net/nostalgia-tv/"
+  },
+  {
+    "id": "rds:nobva-tv-brasov",
+    "name": "Nova TV Brasov",
+    "category": "regionale",
+    "provider": "RDSLive",
+    "rdsPage": "https://rdslive.net/nobva-tv-brasov/"
+  },
+  {
+    "id": "rds:orizont-tv",
+    "name": "Orizont TV",
+    "category": "muzica",
+    "provider": "RDSLive",
+    "rdsPage": "https://rdslive.net/orizont-tv/"
+  },
+  {
+    "id": "rds:tv-party-mix",
+    "name": "Party Mix",
+    "category": "muzica",
+    "provider": "RDSLive",
+    "rdsPage": "https://rdslive.net/tv-party-mix/"
+  },
+  {
+    "id": "rds:povesti-cu-masha",
+    "name": "Povesti cu Masha",
+    "category": "copii",
+    "provider": "RDSLive",
+    "rdsPage": "https://rdslive.net/povesti-cu-masha/"
+  },
+  {
+    "id": "rds:tv-prima-comedy",
+    "name": "Prima Comedy",
+    "category": "filme",
+    "provider": "RDSLive",
+    "rdsPage": "https://rdslive.net/tv-prima-comedy/"
+  },
+  {
+    "id": "rds:prima-history",
+    "name": "Prima History",
+    "category": "documentare",
+    "provider": "RDSLive",
+    "rdsPage": "https://rdslive.net/prima-history/"
+  },
+  {
+    "id": "rds:tv-prima-news",
+    "name": "Prima News",
+    "category": "stiri",
+    "provider": "RDSLive",
+    "rdsPage": "https://rdslive.net/tv-prima-news/"
+  },
+  {
+    "id": "rds:tv-primasport-1hd",
+    "name": "Prima Sport 1",
+    "category": "sport",
+    "provider": "RDSLive",
+    "rdsPage": "https://rdslive.net/tv-primasport-1hd/"
+  },
+  {
+    "id": "rds:tv-primasport-2-hd",
+    "name": "Prima Sport 2",
+    "category": "sport",
+    "provider": "RDSLive",
+    "rdsPage": "https://rdslive.net/tv-primasport-2-hd/"
+  },
+  {
+    "id": "rds:tv-primasport-3-hd-ro1",
+    "name": "Prima Sport 3",
+    "category": "sport",
+    "provider": "RDSLive",
+    "rdsPage": "https://rdslive.net/tv-primasport-3-hd-ro1/"
+  },
+  {
+    "id": "rds:tv-prima-tv-hd",
+    "name": "Prima TV",
+    "category": "generaliste",
+    "provider": "RDSLive",
+    "rdsPage": "https://rdslive.net/tv-prima-tv-hd/"
+  },
+  {
+    "id": "rds:tv-pro-arena-hd",
+    "name": "Pro Arena",
+    "category": "sport",
+    "provider": "RDSLive",
+    "rdsPage": "https://rdslive.net/tv-pro-arena-hd/"
+  },
+  {
+    "id": "rds:tv-pro-cinema",
+    "name": "PRO Cinema",
+    "category": "filme",
+    "provider": "RDSLive",
+    "rdsPage": "https://rdslive.net/tv-pro-cinema/"
+  },
+  {
+    "id": "rds:romania-protv-hd",
+    "name": "Pro TV",
+    "category": "generaliste",
+    "provider": "RDSLive",
+    "rdsPage": "https://rdslive.net/romania-protv-hd/"
+  },
+  {
+    "id": "rds:tv-rai-1",
+    "name": "Rai 1",
+    "category": "generaliste",
+    "provider": "RDSLive",
+    "rdsPage": "https://rdslive.net/tv-rai-1/"
+  },
+  {
+    "id": "rds:tv-rai-3",
+    "name": "Rai 3",
+    "category": "generaliste",
+    "provider": "RDSLive",
+    "rdsPage": "https://rdslive.net/tv-rai-3/"
+  },
+  {
+    "id": "rds:rapsodia-2",
+    "name": "Rapsodia TV",
+    "category": "muzica",
+    "provider": "RDSLive",
+    "rdsPage": "https://rdslive.net/rapsodia-2/"
+  },
+  {
+    "id": "rds:realitatea-md",
+    "name": "Realitatea MD",
+    "category": "stiri",
+    "provider": "RDSLive",
+    "rdsPage": "https://rdslive.net/realitatea-md/"
+  },
+  {
+    "id": "rds:tv-realitatea-tv",
+    "name": "Realitatea Plus",
+    "category": "stiri",
+    "provider": "RDSLive",
+    "rdsPage": "https://rdslive.net/tv-realitatea-tv/"
+  },
+  {
+    "id": "rds:tv-romania-tv",
+    "name": "România TV",
+    "category": "stiri",
+    "provider": "RDSLive",
+    "rdsPage": "https://rdslive.net/tv-romania-tv/"
+  },
+  {
+    "id": "rds:rtn-chicago",
+    "name": "RTN Chicago",
+    "category": "religioase",
+    "provider": "RDSLive",
+    "rdsPage": "https://rdslive.net/rtn-chicago/"
+  },
+  {
+    "id": "rds:tv-skyshowtime-hd",
+    "name": "SkyShowTime 1",
+    "category": "filme",
+    "provider": "RDSLive",
+    "rdsPage": "https://rdslive.net/tv-skyshowtime-hd/"
+  },
+  {
+    "id": "rds:tv-skyshowtime-2-hd",
+    "name": "SkyShowTime 2",
+    "category": "filme",
+    "provider": "RDSLive",
+    "rdsPage": "https://rdslive.net/tv-skyshowtime-2-hd/"
+  },
+  {
+    "id": "rds:tv-speranta-tv",
+    "name": "Speranța TV",
+    "category": "religioase",
+    "provider": "RDSLive",
+    "rdsPage": "https://rdslive.net/tv-speranta-tv/"
+  },
+  {
+    "id": "rds:tv-sportextra-hd",
+    "name": "SportExtra",
+    "category": "sport",
+    "provider": "RDSLive",
+    "rdsPage": "https://rdslive.net/tv-sportextra-hd/"
+  },
+  {
+    "id": "rds:tv-taraf-tv",
+    "name": "Taraf TV",
+    "category": "muzica",
+    "provider": "RDSLive",
+    "rdsPage": "https://rdslive.net/tv-taraf-tv/"
+  },
+  {
+    "id": "rds:tele-7-abc",
+    "name": "Tele 7 ABC",
+    "category": "diverse",
+    "provider": "RDSLive",
+    "rdsPage": "https://rdslive.net/tele-7-abc/"
+  },
+  {
+    "id": "rds:tele-7-music",
+    "name": "Tele 7 Music",
+    "category": "muzica",
+    "provider": "RDSLive",
+    "rdsPage": "https://rdslive.net/tele-7-music/"
+  },
+  {
+    "id": "rds:tele-m-botosani",
+    "name": "Tele M Botosani",
+    "category": "regionale",
+    "provider": "RDSLive",
+    "rdsPage": "https://rdslive.net/tele-m-botosani/"
+  },
+  {
+    "id": "rds:tele-moldova",
+    "name": "Tele Moldova+",
+    "category": "diverse",
+    "provider": "RDSLive",
+    "rdsPage": "https://rdslive.net/tele-moldova/"
+  },
+  {
+    "id": "rds:tv-tlc",
+    "name": "TLC",
+    "category": "diverse",
+    "provider": "RDSLive",
+    "rdsPage": "https://rdslive.net/tv-tlc/"
+  },
+  {
+    "id": "rds:tv-traditional-tv",
+    "name": "Traditional TV",
+    "category": "muzica",
+    "provider": "RDSLive",
+    "rdsPage": "https://rdslive.net/tv-traditional-tv/"
+  },
+  {
+    "id": "rds:tv-tralala",
+    "name": "TraLaLa TV",
+    "category": "copii",
+    "provider": "RDSLive",
+    "rdsPage": "https://rdslive.net/tv-tralala/"
+  },
+  {
+    "id": "rds:tv-travel-mix",
+    "name": "Travel Mix",
+    "category": "documentare",
+    "provider": "RDSLive",
+    "rdsPage": "https://rdslive.net/tv-travel-mix/"
+  },
+  {
+    "id": "rds:tv-trinitas-tv",
+    "name": "Trinitas TV",
+    "category": "religioase",
+    "provider": "RDSLive",
+    "rdsPage": "https://rdslive.net/tv-trinitas-tv/"
+  },
+  {
+    "id": "rds:tv-as",
+    "name": "TV AS",
+    "category": "muzica",
+    "provider": "RDSLive",
+    "rdsPage": "https://rdslive.net/tv-as/"
+  },
+  {
+    "id": "rds:tv-paprika-tv",
+    "name": "TV Paprika",
+    "category": "diverse",
+    "provider": "RDSLive",
+    "rdsPage": "https://rdslive.net/tv-paprika-tv/"
+  },
+  {
+    "id": "rds:tv-tvr-1-hd",
+    "name": "TVR 1",
+    "category": "generaliste",
+    "provider": "RDSLive",
+    "rdsPage": "https://rdslive.net/tv-tvr-1-hd/"
+  },
+  {
+    "id": "rds:tv-tvr-2-hd",
+    "name": "TVR 2",
+    "category": "generaliste",
+    "provider": "RDSLive",
+    "rdsPage": "https://rdslive.net/tv-tvr-2-hd/"
+  },
+  {
+    "id": "rds:tv-tvr-3",
+    "name": "TVR 3",
+    "category": "generaliste",
+    "provider": "RDSLive",
+    "rdsPage": "https://rdslive.net/tv-tvr-3/"
+  },
+  {
+    "id": "rds:tvr-cluj",
+    "name": "TVR Cluj",
+    "category": "regionale",
+    "provider": "RDSLive",
+    "rdsPage": "https://rdslive.net/tvr-cluj/"
+  },
+  {
+    "id": "rds:tvr-craiova",
+    "name": "TVR Craiova",
+    "category": "regionale",
+    "provider": "RDSLive",
+    "rdsPage": "https://rdslive.net/tvr-craiova/"
+  },
+  {
+    "id": "rds:tvr-cultural",
+    "name": "TVR Cultural",
+    "category": "generaliste",
+    "provider": "RDSLive",
+    "rdsPage": "https://rdslive.net/tvr-cultural/"
+  },
+  {
+    "id": "rds:tvr-iasi",
+    "name": "TVR Iași",
+    "category": "regionale",
+    "provider": "RDSLive",
+    "rdsPage": "https://rdslive.net/tvr-iasi/"
+  },
+  {
+    "id": "rds:tvr-infoo",
+    "name": "TVR Info",
+    "category": "stiri",
+    "provider": "RDSLive",
+    "rdsPage": "https://rdslive.net/tvr-infoo/"
+  },
+  {
+    "id": "rds:tv-tvr-sport",
+    "name": "TVR Sport",
+    "category": "sport",
+    "provider": "RDSLive",
+    "rdsPage": "https://rdslive.net/tv-tvr-sport/"
+  },
+  {
+    "id": "rds:tvr-targu-mures",
+    "name": "TVR Târgu Mureș",
+    "category": "regionale",
+    "provider": "RDSLive",
+    "rdsPage": "https://rdslive.net/tvr-targu-mures/"
+  },
+  {
+    "id": "rds:tvr-timisoara",
+    "name": "TVR Timișoara",
+    "category": "regionale",
+    "provider": "RDSLive",
+    "rdsPage": "https://rdslive.net/tvr-timisoara/"
+  },
+  {
+    "id": "rds:u-tv",
+    "name": "U TV",
+    "category": "muzica",
+    "provider": "RDSLive",
+    "rdsPage": "https://rdslive.net/u-tv/"
+  },
+  {
+    "id": "rds:tv-viasat-explore",
+    "name": "Viasat Explore",
+    "category": "documentare",
+    "provider": "RDSLive",
+    "rdsPage": "https://rdslive.net/tv-viasat-explore/"
+  },
+  {
+    "id": "rds:tv-viasat-history",
+    "name": "Viasat History",
+    "category": "documentare",
+    "provider": "RDSLive",
+    "rdsPage": "https://rdslive.net/tv-viasat-history/"
+  },
+  {
+    "id": "rds:tv-tv-1000",
+    "name": "Viasat Kino",
+    "category": "filme",
+    "provider": "RDSLive",
+    "rdsPage": "https://rdslive.net/tv-tv-1000/"
+  },
+  {
+    "id": "rds:tv-viasat-nature",
+    "name": "Viasat Nature",
+    "category": "documentare",
+    "provider": "RDSLive",
+    "rdsPage": "https://rdslive.net/tv-viasat-nature/"
+  },
+  {
+    "id": "rds:tv-warner-tv",
+    "name": "Warner TV",
+    "category": "filme",
+    "provider": "RDSLive",
+    "rdsPage": "https://rdslive.net/tv-warner-tv/"
+  }
+]

@@ -2,10 +2,11 @@ package com.omestream.livetest
 
 import android.annotation.SuppressLint
 import android.app.Activity
-import android.app.AlertDialog
 import android.content.ClipData
 import android.content.ClipboardManager
 import android.content.Context
+import android.content.Intent
+import android.content.res.Configuration
 import android.graphics.Color
 import android.net.Uri
 import android.os.Bundle
@@ -13,457 +14,288 @@ import android.os.Handler
 import android.os.Looper
 import android.view.Gravity
 import android.view.View
-import android.webkit.CookieManager
+import android.view.ViewGroup
+import android.webkit.WebChromeClient
 import android.webkit.WebResourceRequest
 import android.webkit.WebView
 import android.webkit.WebViewClient
-import android.widget.FrameLayout
-import android.widget.ProgressBar
 import android.widget.Button
-import android.widget.EditText
+import android.widget.FrameLayout
+import android.widget.HorizontalScrollView
 import android.widget.LinearLayout
 import android.widget.ScrollView
 import android.widget.TextView
-import androidx.media3.common.C
-import androidx.media3.common.MediaItem
-import androidx.media3.common.MimeTypes
-import androidx.media3.common.PlaybackException
-import androidx.media3.common.Player
-import androidx.media3.common.Tracks
-import androidx.media3.common.VideoSize
-import androidx.media3.datasource.DefaultHttpDataSource
-import androidx.media3.exoplayer.ExoPlayer
-import androidx.media3.ui.PlayerView
-import java.util.concurrent.CopyOnWriteArrayList
+import android.widget.Toast
+import org.json.JSONArray
 
+/** OME Live Test: independent, read-only use of existing public channel metadata.
+ * The provider page creates its own authorized streaming session in this WebView.
+ * No token harvesting, gate automation, stream proxying, or playback bypass.
+ */
 @SuppressLint("SetJavaScriptEnabled")
 class MainActivity : Activity() {
-    private data class Candidate(val url: String, val headers: Map<String, String>)
-    private val candidates = CopyOnWriteArrayList<Candidate>()
-    private val logLines = mutableListOf<String>()
-    private val main = Handler(Looper.getMainLooper())
-    private lateinit var web: WebView
-    private lateinit var video: PlayerView
-    private lateinit var status: TextView
+    private data class Channel(val id:String, val name:String, val category:String, val page:String, val logo:String)
+    private val channels = mutableListOf<Channel>()
+    private val ui = Handler(Looper.getMainLooper())
+    private lateinit var playerWeb: WebView
+    private lateinit var epgWeb: WebView
+    private lateinit var mainFrame: FrameLayout
     private lateinit var loading: LinearLayout
-    private lateinit var loadingText: TextView
-    private lateinit var captureToolbar: LinearLayout
-    private var interactiveMode = false
-    private var pageGeneration = 0
-    private var lastHttpError: Int? = null
-    private var webError = "none"
-    private var observedRequests = 0
-    private var lastManifestHost = "none"
-    private var attempted = mutableSetOf<String>()
-    private var player: ExoPlayer? = null
-    private var selected: Candidate? = null
-    private var firstFrame = false
-    private val sessionResolver = LiveSessionResolver()
-    private var lastFailedRequestType = "none"
-    private var lastFailedHost = "none"
-    private val site = "https://antena1.live/antena-1-live/"
+    private lateinit var loadingLabel: TextView
+    private lateinit var root: LinearLayout
+    private lateinit var titleLabel: TextView
+    private lateinit var infoLabel: TextView
+    private lateinit var sourceLabel: TextView
+    private var active: Channel? = null
+    private var provider = "Antena Live"
+    private var generation = 0
+    private var videoReady = false
+    private var showOriginalPage = false
+    private var requests = 0
+    private var manifests = 0
+    private var lastHttp = "none"
+    private var lastMediaHost = "none"
+    private var playerStartedAt = 0L
+    private val dark = 0xFF0B1220.toInt()
+    private val card = 0xFF172235.toInt()
+    private val accent = 0xFFB11F30.toInt()
+    private val antenna1 = "https://antena1.live/antena-1-live/"
+    private val antennaEpg = "https://antena1.live/ghid-tv/"
+    private val rdsEpg = "https://rdslive.net/program-tv-acum/"
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        window.statusBarColor = dark
+        window.navigationBarColor = dark
+        parseChannels()
+        setupWebViews()
+        selectChannel(channels.first(), "Antena Live")
+        renderLayout()
+    }
 
-        val root = FrameLayout(this).apply {
-            setBackgroundColor(Color.BLACK)
+    private fun parseChannels() {
+        val items = JSONArray(assets.open("ome_live_channels.json").bufferedReader().use { it.readText() })
+        for (i in 0 until items.length()) {
+            val j = items.getJSONObject(i)
+            val page = j.optString("rdsPage")
+            if (page.startsWith("https://rdslive.net/")) channels.add(
+                Channel(j.optString("id"), j.optString("name"), j.optString("category"), page, j.optString("logo"))
+            )
         }
+        channels.sortWith(compareBy<Channel> { if (it.name.equals("Antena 1", true)) -1 else 0 }.thenBy { it.name.lowercase() })
+        if (channels.none { it.name.equals("Antena 1",true) })
+            channels.add(0, Channel("antena1", "Antena 1", "generaliste", antenna1, ""))
+    }
 
-        status = TextView(this)
-
-        web = WebView(this).apply {
+    private fun setupWebViews() {
+        playerWeb = WebView(this).apply {
+            setBackgroundColor(Color.BLACK)
             settings.javaScriptEnabled = true
             settings.domStorageEnabled = true
-            settings.mediaPlaybackRequiresUserGesture = false
+            settings.mediaPlaybackRequiresUserGesture = true
             settings.setSupportMultipleWindows(false)
             settings.javaScriptCanOpenWindowsAutomatically = false
-
-            webViewClient = object : WebViewClient() {
-                override fun shouldInterceptRequest(
-                    view: WebView?,
-                    request: WebResourceRequest
-                ): android.webkit.WebResourceResponse? {
-                    val uri = request.url
-                    val path = uri.path.orEmpty().lowercase()
-                    val isMedia = uri.scheme == "https" &&
-                        (path.endsWith(".m3u8") || path.endsWith(".mpd"))
-                    if (uri.scheme == "https" && uri.host != null) {
-                        observedRequests++
-                    }
-
-                    if (isMedia && candidates.none {
-                            it.url == uri.toString()
-                        }) {
-                        val candidate = Candidate(
-                            uri.toString(),
-                            request.requestHeaders.toMap()
-                        )
-                        candidates.add(candidate)
-
-                        main.post {
-                            lastManifestHost = uri.host.orEmpty()
-                            report("Manifest detected: " + lastManifestHost)
-                            report("Sursa capturata; nu intrerup pagina. Test Media3 disponibil.")
+            webChromeClient = WebChromeClient()
+            webViewClient = object: WebViewClient() {
+                override fun shouldInterceptRequest(v:WebView?, request:WebResourceRequest):android.webkit.WebResourceResponse? {
+                    val u = request.url
+                    if (u.scheme == "https") {
+                        synchronized(this@MainActivity) {
+                            requests++
+                            if (u.path.orEmpty().matches(Regex("(?i).*\\.(m3u8|mpd)$"))) {
+                                manifests++
+                                lastMediaHost = u.host ?: "unknown"
+                            }
                         }
                     }
                     return null
                 }
-
-                override fun onReceivedHttpError(
-                    view: WebView?, request: WebResourceRequest?,
-                    errorResponse: android.webkit.WebResourceResponse?
-                ) {
-                    val code = errorResponse?.statusCode ?: return
-                    if (code >= 400 && (request?.isForMainFrame == true || code == 401 || code == 403)) {
-                        main.post {
-                            lastHttpError = code
-                            report("Web HTTP=$code host=${request?.url?.host ?: "unknown"}")
-                        }
+                override fun onReceivedHttpError(v:WebView?,request:WebResourceRequest?,response:android.webkit.WebResourceResponse?) {
+                    val code = response?.statusCode ?: return
+                    if (code == 401 || code == 403) {
+                        lastHttp = "$code @ ${request?.url?.host ?: "unknown"}"
                     }
                 }
-
-                override fun onReceivedError(
-                    view: WebView?, request: WebResourceRequest?,
-                    error: android.webkit.WebResourceError?
-                ) {
-                    if (request?.isForMainFrame == true) {
-                        main.post {
-                            webError = error?.errorCode?.toString() ?: "unknown"
-                            report("Page load error code=$webError")
-                        }
-                    }
-                }
-
-                override fun onPageFinished(
-                    view: WebView?,
-                    url: String?
-                ) {
-                    report("Page loaded")
-                    view?.evaluateJavascript(
-                        "(function(){return document.querySelector('video') ? 'video-found' : 'no-video-element';})()"
-                    ) { result -> report("HTML video element: $result") }
+                override fun onPageFinished(v:WebView?,url:String?) {
+                    val run = generation
+                    ui.postDelayed({ if (run == generation) updateVideoStatus() }, 1200L)
                 }
             }
         }
-
-        root.addView(
-            web,
-            FrameLayout.LayoutParams(-1, -1)
-        )
-
-        video = PlayerView(this).apply {
-            setBackgroundColor(Color.BLACK)
-            useController = true
-            visibility = View.GONE
+        epgWeb = WebView(this).apply {
+            settings.javaScriptEnabled = true
+            settings.domStorageEnabled = true
+            setBackgroundColor(card)
+            webViewClient = WebViewClient()
         }
+    }
 
-        root.addView(
-            video,
-            FrameLayout.LayoutParams(-1, -1)
-        )
+    private fun dp(n:Int) = (n * resources.displayMetrics.density).toInt()
+    private fun text(s:String, size:Float=14f, color:Int=Color.WHITE) = TextView(this).apply {
+        text=s; textSize=size; setTextColor(color); setPadding(dp(9),dp(8),dp(9),dp(8))
+    }
+    private fun button(label:String, action:()->Unit) = Button(this).apply {
+        text=label; isAllCaps=false; setOnClickListener { action() }
+    }
+    private fun detach(view:View) { (view.parent as? ViewGroup)?.removeView(view) }
 
-        loadingText = TextView(this).apply {
-            text = "Se cauta sursa LIVE..."
-            setTextColor(Color.WHITE)
-            textSize = 17f
-            gravity = Gravity.CENTER
+    private fun renderLayout() {
+        val wide = resources.configuration.orientation == Configuration.ORIENTATION_LANDSCAPE
+        if (::root.isInitialized) {
+            detach(playerWeb); detach(epgWeb); detach(loading)
         }
+        root = LinearLayout(this).apply { orientation=LinearLayout.VERTICAL; setBackgroundColor(dark) }
+        val header = LinearLayout(this).apply { orientation=LinearLayout.HORIZONTAL; gravity=Gravity.CENTER_VERTICAL; setBackgroundColor(card) }
+        header.addView(text("OME STREAM  •  LIVE TV", 17f), LinearLayout.LayoutParams(0, -2, 1f))
+        header.addView(button("Raport") { copyReport() })
+        root.addView(header)
 
-        loading = LinearLayout(this).apply {
-            orientation = LinearLayout.VERTICAL
-            gravity = Gravity.CENTER
-            setBackgroundColor(0xFF101827.toInt())
+        val body=LinearLayout(this).apply { orientation=if(wide) LinearLayout.HORIZONTAL else LinearLayout.VERTICAL }
+        root.addView(body, LinearLayout.LayoutParams(-1,0,1f))
 
-            addView(TextView(this@MainActivity).apply {
-                text = "OME STREAM"
-                textSize = 28f
-                setTextColor(Color.WHITE)
-                gravity = Gravity.CENTER
-                setPadding(0, 0, 0, dp(30))
-            })
+        val channelPanel=buildChannelPanel(wide)
+        if(wide) body.addView(channelPanel, LinearLayout.LayoutParams(dp(205),-1))
+        else body.addView(channelPanel, LinearLayout.LayoutParams(-1,dp(112)))
 
-            addView(ProgressBar(this@MainActivity))
+        val content=LinearLayout(this).apply { orientation=if(wide) LinearLayout.HORIZONTAL else LinearLayout.VERTICAL }
+        body.addView(content, LinearLayout.LayoutParams(if(wide) 0 else -1,if(wide) -1 else 0,1f))
 
-            addView(loadingText, LinearLayout.LayoutParams(
-                -1, dp(70)
-            ))
-
-            addView(Button(this@MainActivity).apply {
-                text = "Reincarca transmisia"
-                setOnClickListener {
-                    stopPlayer()
-                    firstFrame = false
-                    selected = null
-                    attempted.clear()
-                    candidates.clear()
-                    loading.visibility = View.VISIBLE
-                    loadingText.text = "Se cauta sursa LIVE..."
-                    pageGeneration++
-                    lastHttpError = null
-                    observedRequests = 0
-                    webError = "none"
-                    interactiveMode = false
-                    web.loadUrl(site)
-                }
-            })
-
-            addView(Button(this@MainActivity).apply {
-                text = "Deschide pagina pentru Play"
-                setOnClickListener {
-                    interactiveMode = true
-                    stopPlayer()
-                    candidates.clear()
-                    attempted.clear()
-                    observedRequests = 0
-                    lastHttpError = null
-                    webError = "none"
-                    firstFrame = false
-                    lastFailedRequestType = "none"
-                    lastFailedHost = "none"
-                    loading.visibility = View.GONE
-                    captureToolbar.visibility = View.VISIBLE
-                    report("Captura pornita. Apasa Play pe pagina si asteapta 10 secunde.")
-                }
-            })
-
-            addView(Button(this@MainActivity).apply {
-                text = "Diagnostic (fara tokenuri)"
-                setOnClickListener {
-                    val details = "Requests observed: $observedRequests\n" +
-                        "Manifests: ${candidates.size}\n" +
-                        "Last manifest host: $lastManifestHost\n" +
-                        "Web HTTP error: ${lastHttpError ?: "none"}\n" +
-                        "Web error: $webError\n" +
-                        "Player running: ${player != null}\n" +
-                        "First video frame: $firstFrame\n" +
-            "Last Media3 failure: $lastFailedRequestType host=$lastFailedHost\n" +
-                        logLines.takeLast(10).joinToString("\n")
-                    AlertDialog.Builder(this@MainActivity)
-                        .setTitle("OME diagnostic")
-                        .setMessage(details)
-                        .setPositiveButton("Inchide", null)
-                        .setNeutralButton("Copiaza") { _, _ ->
-                            (getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager)
-                                .setPrimaryClip(ClipData.newPlainText("OME diagnostic", details))
-                        }.show()
-                }
-            })
-        }
-
-        root.addView(
-            loading,
-            FrameLayout.LayoutParams(-1, -1)
-        )
-
-        // Meniu mic peste WebView: site-ul ramane utilizabil pentru Play.
-        captureToolbar = LinearLayout(this).apply {
-            orientation = LinearLayout.HORIZONTAL
-            setBackgroundColor(0xE8101827.toInt())
-            visibility = View.GONE
-            addView(Button(this@MainActivity).apply {
-                text = "Copiaza raport"
-                setAllCaps(false)
-                setOnClickListener { copySafeReport() }
-            }, LinearLayout.LayoutParams(0, dp(52), 1f))
-            addView(Button(this@MainActivity).apply {
-                text = "Test Media3"
-                setAllCaps(false)
-                setOnClickListener {
-                    val media = candidates.lastOrNull()
-                    if (media == null) {
-                        report("Niciun manifest. Apasa Play pe site mai intai.")
-                        android.widget.Toast.makeText(this@MainActivity,
-                            "Niciun manifest detectat", android.widget.Toast.LENGTH_SHORT).show()
-                    } else {
-                        selected = media
-                        attempted.add(media.url)
-                        loading.visibility = View.VISIBLE
-                        loadingText.text = "Test Media3..."
-                        playSelected()
-                    }
-                }
-            }, LinearLayout.LayoutParams(0, dp(52), 1f))
-            addView(Button(this@MainActivity).apply {
-                text = "Inapoi"
-                setAllCaps(false)
-                setOnClickListener {
-                    captureToolbar.visibility = View.GONE
-                    loading.visibility = View.VISIBLE
-                }
-            }, LinearLayout.LayoutParams(0, dp(52), 1f))
-        }
-        root.addView(captureToolbar,
-            FrameLayout.LayoutParams(-1, -2, Gravity.BOTTOM).apply {
-                bottomMargin = dp(32)
-            })
-
+        mainFrame=FrameLayout(this).apply { setBackgroundColor(Color.BLACK) }
+        detach(playerWeb)
+        mainFrame.addView(playerWeb,FrameLayout.LayoutParams(-1,-1))
+        loading=createLoading()
+        mainFrame.addView(loading,FrameLayout.LayoutParams(-1,-1))
+        loading.visibility=if (videoReady || showOriginalPage) View.GONE else View.VISIBLE
+        content.addView(mainFrame, LinearLayout.LayoutParams(if(wide) 0 else -1, if(wide) -1 else 0, if(wide) 1f else 1f))
+        val details=buildInfoPanel(wide)
+        content.addView(details, LinearLayout.LayoutParams(if(wide) dp(255) else -1,if(wide) -1 else dp(215)))
         setContentView(root)
-        web.loadUrl(site)
-
-        main.postDelayed({
-            if (!firstFrame && player == null) {
-                loadingText.text =
-                    "Nu exista manifest detectat. Deschide pagina pentru Play sau verifica diagnosticul."
-            }
-        }, 20000)
     }
 
-    private fun copySafeReport() {
-        // Niciodata URL-uri complete, query params, tokenuri sau cookie-uri.
-        val details = "OME Live Test 0.6 - session diagnostics\n" +
-            "Requests observed: $observedRequests\n" +
-            "Manifests: ${candidates.size}\n" +
-            "Last manifest host: $lastManifestHost\n" +
-            "Web HTTP error: ${lastHttpError ?: "none"}\n" +
-            "Web error: $webError\n" +
-            "Player running: ${player != null}\n" +
-            "First video frame: $firstFrame\n" +
-            "Last Media3 failure: $lastFailedRequestType host=$lastFailedHost\n" +
-            "Last events:\n" + logLines.takeLast(16).joinToString("\n")
-        (getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager)
-            .setPrimaryClip(ClipData.newPlainText("OME safe diagnostic", details))
-        AlertDialog.Builder(this).setTitle("Raport copiat")
-            .setMessage(details).setPositiveButton("OK", null).show()
+    private fun buildChannelPanel(wide:Boolean):View {
+        if(wide) {
+            val col=LinearLayout(this).apply { orientation=LinearLayout.VERTICAL;setBackgroundColor(card) }
+            col.addView(text("CANALE TV  (${channels.size})",14f))
+            val sc=ScrollView(this)
+            val list=LinearLayout(this).apply { orientation=LinearLayout.VERTICAL }
+            channels.forEach { c -> list.addView(channelButton(c,true)) }
+            sc.addView(list); col.addView(sc, LinearLayout.LayoutParams(-1,0,1f))
+            return col
+        }
+        val col=LinearLayout(this).apply { orientation=LinearLayout.VERTICAL;setBackgroundColor(card) }
+        col.addView(text("CANALE TV  •  derulează pentru mai multe",12f))
+        val sc=HorizontalScrollView(this).apply { isHorizontalScrollBarEnabled=true }
+        val list=LinearLayout(this).apply { orientation=LinearLayout.HORIZONTAL }
+        channels.forEach { c -> list.addView(channelButton(c,false)) }
+        sc.addView(list); col.addView(sc,LinearLayout.LayoutParams(-1,0,1f))
+        return col
+    }
+    private fun channelButton(c:Channel, wide:Boolean):View = TextView(this).apply {
+        text=c.name
+        textSize=if(wide) 14f else 12f
+        setTextColor(Color.WHITE)
+        setBackgroundColor(if(active?.id==c.id) accent else card)
+        gravity=Gravity.CENTER_VERTICAL
+        setPadding(dp(12),dp(9),dp(12),dp(9))
+        layoutParams=if(wide) LinearLayout.LayoutParams(-1,dp(46)) else LinearLayout.LayoutParams(dp(125),dp(55))
+        setOnClickListener { selectChannel(c,if(c.name.equals("Antena 1",true)) "Antena Live" else "RDSLive"); renderLayout() }
+    }
+    private fun buildInfoPanel(wide:Boolean):View {
+        val c=active ?: channels.first()
+        val info=LinearLayout(this).apply { orientation=LinearLayout.VERTICAL;setBackgroundColor(card) }
+        titleLabel=text(c.name,19f); info.addView(titleLabel)
+        infoLabel=text("Categorie: ${c.category}\nEPG: ${if (provider=="Antena Live") "Antena Live" else "RDSLive"}",12f,0xFFCCD7E5.toInt())
+        info.addView(infoLabel)
+        sourceLabel=text("Sursă: $provider",12f)
+        info.addView(sourceLabel)
+        val switchRow=LinearLayout(this).apply { orientation=LinearLayout.HORIZONTAL }
+        if (c.name.equals("Antena 1",true)) switchRow.addView(button("Antena Live") { selectChannel(c,"Antena Live");renderLayout() },LinearLayout.LayoutParams(0,dp(44),1f))
+        switchRow.addView(button("RDSLive") { selectChannel(c,"RDSLive");renderLayout() },LinearLayout.LayoutParams(0,dp(44),1f))
+        info.addView(switchRow)
+        val actions=LinearLayout(this).apply { orientation=LinearLayout.HORIZONTAL }
+        actions.addView(button("Play / pagină") { showOriginalPage=true;loading.visibility=View.GONE },LinearLayout.LayoutParams(0,dp(44),1f))
+        actions.addView(button("Reîncarcă") { active?.let { selectChannel(it,provider) } },LinearLayout.LayoutParams(0,dp(44),1f))
+        info.addView(actions)
+        // EPG provider page is displayed as-is. No invented broadcast times.
+        info.addView(text("GHID TV • date de la furnizor",12f))
+        val epgActions=LinearLayout(this).apply { orientation=LinearLayout.HORIZONTAL }
+        epgActions.addView(button("Vezi EPG") {
+            val u=if(provider=="Antena Live") antennaEpg else rdsEpg
+            epgWeb.loadUrl(u)
+            android.app.AlertDialog.Builder(this).setTitle("Ghid TV · $provider")
+                .setView(LinearLayout(this).apply {
+                    orientation=LinearLayout.VERTICAL
+                    detach(epgWeb)
+                    addView(epgWeb,LinearLayout.LayoutParams(-1,dp(370)))
+                }).setPositiveButton("Închide",null).show()
+        },LinearLayout.LayoutParams(0,dp(44),1f))
+        epgActions.addView(button("Browser") {
+            startActivity(Intent(Intent.ACTION_VIEW,Uri.parse(if(provider=="Antena Live") antennaEpg else rdsEpg)))
+        },LinearLayout.LayoutParams(0,dp(44),1f))
+        info.addView(epgActions)
+        info.addView(text("Programul curent și următorul se verifică în ghidul furnizorului.",12f,0xFFADBFD3.toInt()))
+        return info
     }
 
-    private fun dp(v: Int): Int = (v * resources.displayMetrics.density).toInt()
-
-    private fun report(message: String) {
-        if (Looper.myLooper() != Looper.getMainLooper()) { main.post { report(message) }; return }
-        val clean = message.replace(Regex("(?i)(token|cookie|auth|key|signature)=\\S+"), "$1=[hidden]")
-        logLines.add(clean)
-        while (logLines.size > 90) logLines.removeAt(0)
-        status.text = logLines.takeLast(14).joinToString("\n")
-    }
-
-    private fun chooseStream() {
-        if (candidates.isEmpty()) { report("No HLS/DASH manifest detected. Interact with site's player first."); return }
-        val items = candidates.mapIndexed { i, c ->
-            val u = Uri.parse(c.url)
-            "${i + 1}. ${u.host} · ${if (u.path.orEmpty().endsWith(".mpd")) "DASH" else "HLS"}"
-        }.toTypedArray()
-        AlertDialog.Builder(this).setTitle("Choose captured manifest")
-            .setItems(items) { _, which ->
-                selected = candidates[which]
-                report("Selected manifest ${which + 1}/${candidates.size} (URL hidden)")
-            }.show()
-    }
-
-    @SuppressLint("UnsafeOptInUsageError")
-    private fun playSelected() {
-        val media = selected ?: run { report("Choose a manifest first"); return }
-        stopPlayer()
-        firstFrame = false
-        val uri = Uri.parse(media.url)
-        // Cookies must be retrieved on the UI thread. They are not logged or exported.
-        val resolved = sessionResolver.resolve(
-            media.url, media.headers, site, web.settings.userAgentString
-        )
-        val headers = resolved.headers
-        val agent = resolved.userAgent
-        val factory = DefaultHttpDataSource.Factory()
-            .setUserAgent(agent)
-            .setDefaultRequestProperties(headers)
-            .setAllowCrossProtocolRedirects(false)
-        val p = ExoPlayer.Builder(this)
-            .setMediaSourceFactory(
-                androidx.media3.exoplayer.source.DefaultMediaSourceFactory(factory)
-            ).build()
-        player = p
-        video.player = p
-        video.visibility = View.VISIBLE
-        report("Resolver: host=${resolved.manifestHost} cookiesPresent=${resolved.cookiesPresent} signedQueryPresent=${resolved.signedQueryPresent}")
-        report("Media3 preparing")
-        p.addListener(object : Player.Listener {
-            override fun onPlaybackStateChanged(state: Int) {
-                report("Playback state=${when(state) { Player.STATE_IDLE -> "IDLE"; Player.STATE_BUFFERING -> "BUFFERING"; Player.STATE_READY -> "READY (not proof of picture)"; Player.STATE_ENDED -> "ENDED"; else -> state.toString() }}")
-            }
-            override fun onTracksChanged(tracks: Tracks) {
-                val groups = tracks.groups
-                val v = groups.filter { it.type == C.TRACK_TYPE_VIDEO }
-                val a = groups.filter { it.type == C.TRACK_TYPE_AUDIO }
-                report("Tracks: videoGroups=${v.size} audioGroups=${a.size} videoSupported=${v.any { g -> (0 until g.length).any { g.isTrackSupported(it) } }} videoSelected=${v.any { g -> (0 until g.length).any { g.isTrackSelected(it) } }}")
-                for (g in v) for (i in 0 until g.length) {
-                    val f = g.getTrackFormat(i)
-                    report("Video format: codec=${f.codecs ?: "unknown"} mime=${f.sampleMimeType ?: "unknown"} ${f.width}x${f.height} supported=${g.isTrackSupported(i)} selected=${g.isTrackSelected(i)}")
-                }
-            }
-            override fun onVideoSizeChanged(videoSize: VideoSize) {
-                report("Video size=${videoSize.width}x${videoSize.height}")
-            }
-            override fun onRenderedFirstFrame() {
-                firstFrame = true
-                loading.visibility = View.GONE
-                report("FIRST VIDEO FRAME RENDERED ✅")
-            }
-            override fun onPlayerError(error: PlaybackException) {
-                var cause: Throwable? = error
-                var httpCode = "none"
-                while (cause != null) {
-                    if (cause is androidx.media3.datasource.HttpDataSource.InvalidResponseCodeException) {
-                        httpCode = cause.responseCode.toString()
-                        val failedUri = cause.dataSpec.uri
-                        lastFailedRequestType = sessionResolver.requestType(failedUri.toString())
-                        lastFailedHost = failedUri.host ?: "unknown"
-                    }
-                    cause = cause.cause
-                }
-                report("PLAYER ERROR code=${error.errorCodeName} HTTP=$httpCode stage=$lastFailedRequestType host=$lastFailedHost firstFrame=$firstFrame")
-                if (httpCode == "401" || httpCode == "403") {
-                    report("Access denied; a new authorized website session may be required")
-                }
-                main.post {
-                    if (player === p && !firstFrame) {
-                        if (httpCode == "401" || httpCode == "403") {
-                            stopPlayer()
-                            loading.visibility = View.VISIBLE
-                            loadingText.text = "Acces respins ($httpCode). Revino la pagina si porneste o sesiune valida."
-                        } else retryNext()
-                    }
-                }
-            }
+    private fun createLoading():LinearLayout = LinearLayout(this).apply {
+        orientation=LinearLayout.VERTICAL
+        gravity=Gravity.CENTER
+        setBackgroundColor(0xF20B1220.toInt())
+        addView(text("OME STREAM",23f))
+        loadingLabel=text("Se încarcă transmisia…",15f)
+        addView(loadingLabel)
+        addView(button("Afișează playerul site-ului") {
+            showOriginalPage=true;visibility=View.GONE
         })
-        val type = if (uri.path.orEmpty().lowercase().endsWith(".mpd")) MimeTypes.APPLICATION_MPD else MimeTypes.APPLICATION_M3U8
-        p.setMediaItem(MediaItem.Builder().setUri(media.url).setMimeType(type).build())
-        p.prepare()
-        p.play()
-        main.postDelayed({
-            if (player === p && !firstFrame) retryNext()
-        }, 15_000)
     }
-
-    private fun retryNext() {
-        if (firstFrame) return
-
-        val next = candidates.firstOrNull {
-            it.url !in attempted
+    private fun selectChannel(c:Channel,selectedProvider:String) {
+        active=c
+        provider=selectedProvider
+        generation++
+        videoReady=false;showOriginalPage=false;requests=0;manifests=0;lastHttp="none";lastMediaHost="none"
+        playerStartedAt=System.currentTimeMillis()
+        val url=if(provider=="Antena Live") antenna1 else c.page
+        if(::playerWeb.isInitialized) {
+            playerWeb.loadUrl(url)
+            if(::loading.isInitialized) {loading.visibility=View.VISIBLE;loadingLabel.text="Se încarcă ${c.name}…"}
         }
-
-        if (next != null) {
-            attempted.add(next.url)
-            selected = next
-            loadingText.text = "Se incearca alta sursa..."
-            playSelected()
-        } else {
-            stopPlayer()
-            loading.visibility = View.VISIBLE
-            loadingText.text =
-                "Media3 nu poate reda sursa. Verifica diagnosticul."
+        val run=generation
+        ui.postDelayed({ if(run==generation) updateVideoStatus() },3000L)
+        ui.postDelayed({
+            if(run==generation && !videoReady && ::loading.isInitialized) {
+                loadingLabel.text="Playerul necesită Play sau inițializarea sesiunii."
+            }
+        },14000L)
+    }
+    private fun updateVideoStatus() {
+        if(!::playerWeb.isInitialized) return
+        val run=generation
+        val probe="""(function(){var v=document.querySelector('video');if(!v)return 'missing';return v.readyState>=2 && !v.paused && v.videoWidth>0?'playing':'waiting';})()"""
+        playerWeb.evaluateJavascript(probe) { result ->
+            if (run!=generation) return@evaluateJavascript
+            if(result=="\"playing\"") {
+                videoReady=true
+                if(::loading.isInitialized) loading.visibility=View.GONE
+            } else if(!videoReady && System.currentTimeMillis()-playerStartedAt < 30000L) {
+                ui.postDelayed({if(run==generation) updateVideoStatus()},1500L)
+            }
         }
     }
-
-    private fun stopPlayer() {
-        video.player = null
-        player?.release()
-        player = null
-        video.visibility = View.GONE
+    private fun copyReport() {
+        val report="OME Live Test v0.7\nCanal: ${active?.name}\nFurnizor: $provider\nCereri: $requests\nManifeste: $manifests\nUltimul host media: $lastMediaHost\nHTTP: $lastHttp\nVideo first-frame check: $videoReady\nPagina afișată: $showOriginalPage\nNu sunt exportate tokenuri, cookie-uri sau URL-uri semnate."
+        (getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager).setPrimaryClip(ClipData.newPlainText("OME report",report))
+        Toast.makeText(this,"Raport copiat",Toast.LENGTH_SHORT).show()
     }
-
+    override fun onConfigurationChanged(newConfig:Configuration) {
+        super.onConfigurationChanged(newConfig)
+        renderLayout() // Preserve same WebView and provider session on rotation.
+    }
+    override fun onBackPressed() {
+        if(playerWeb.canGoBack()) playerWeb.goBack() else super.onBackPressed()
+    }
     override fun onDestroy() {
-        stopPlayer()
-        main.removeCallbacksAndMessages(null)
-        web.destroy()
+        ui.removeCallbacksAndMessages(null)
+        playerWeb.stopLoading();playerWeb.destroy();epgWeb.destroy()
         super.onDestroy()
     }
 }
