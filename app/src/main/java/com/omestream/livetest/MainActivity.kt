@@ -47,6 +47,7 @@ class MainActivity : Activity() {
     private lateinit var status: TextView
     private lateinit var loading: LinearLayout
     private lateinit var loadingText: TextView
+    private lateinit var captureToolbar: LinearLayout
     private var interactiveMode = false
     private var pageGeneration = 0
     private var lastHttpError: Int? = null
@@ -100,12 +101,7 @@ class MainActivity : Activity() {
                         main.post {
                             lastManifestHost = uri.host.orEmpty()
                             report("Manifest detected: " + lastManifestHost)
-                            if (player == null && !firstFrame) {
-                                selected = candidate
-                                attempted.add(candidate.url)
-                                loadingText.text = "Se conecteaza la transmisie..."
-                                playSelected()
-                            }
+                            report("Sursa capturata; nu intrerup pagina. Test Media3 disponibil.")
                         }
                     }
                     return null
@@ -142,7 +138,7 @@ class MainActivity : Activity() {
                 ) {
                     report("Page loaded")
                     view?.evaluateJavascript(
-                        "(function(){var v=document.querySelector('video');if(v){v.muted=true;v.play().catch(function(){});return 'video-found';}return 'no-video-element';})()"
+                        "(function(){return document.querySelector('video') ? 'video-found' : 'no-video-element';})()"
                     ) { result -> report("HTML video element: $result") }
                 }
             }
@@ -213,8 +209,16 @@ class MainActivity : Activity() {
                 text = "Deschide pagina pentru Play"
                 setOnClickListener {
                     interactiveMode = true
+                    stopPlayer()
+                    candidates.clear()
+                    attempted.clear()
+                    observedRequests = 0
+                    lastHttpError = null
+                    webError = "none"
+                    firstFrame = false
                     loading.visibility = View.GONE
-                    report("Interactive mode: user opened website")
+                    captureToolbar.visibility = View.VISIBLE
+                    report("Captura pornita. Apasa Play pe pagina si asteapta 10 secunde.")
                 }
             })
 
@@ -246,6 +250,46 @@ class MainActivity : Activity() {
             FrameLayout.LayoutParams(-1, -1)
         )
 
+        // Meniu mic peste WebView: site-ul ramane utilizabil pentru Play.
+        captureToolbar = LinearLayout(this).apply {
+            orientation = LinearLayout.HORIZONTAL
+            setBackgroundColor(0xE8101827.toInt())
+            visibility = View.GONE
+            addView(Button(this@MainActivity).apply {
+                text = "Copiaza raport"
+                setAllCaps(false)
+                setOnClickListener { copySafeReport() }
+            }, LinearLayout.LayoutParams(0, dp(52), 1f))
+            addView(Button(this@MainActivity).apply {
+                text = "Test Media3"
+                setAllCaps(false)
+                setOnClickListener {
+                    val media = candidates.lastOrNull()
+                    if (media == null) {
+                        report("Niciun manifest. Apasa Play pe site mai intai.")
+                        android.widget.Toast.makeText(this@MainActivity,
+                            "Niciun manifest detectat", android.widget.Toast.LENGTH_SHORT).show()
+                    } else {
+                        selected = media
+                        attempted.add(media.url)
+                        loading.visibility = View.VISIBLE
+                        loadingText.text = "Test Media3..."
+                        playSelected()
+                    }
+                }
+            }, LinearLayout.LayoutParams(0, dp(52), 1f))
+            addView(Button(this@MainActivity).apply {
+                text = "Inapoi"
+                setAllCaps(false)
+                setOnClickListener {
+                    captureToolbar.visibility = View.GONE
+                    loading.visibility = View.VISIBLE
+                }
+            }, LinearLayout.LayoutParams(0, dp(52), 1f))
+        }
+        root.addView(captureToolbar,
+            FrameLayout.LayoutParams(-1, -2, Gravity.TOP))
+
         setContentView(root)
         web.loadUrl(site)
 
@@ -255,6 +299,23 @@ class MainActivity : Activity() {
                     "Nu exista manifest detectat. Deschide pagina pentru Play sau verifica diagnosticul."
             }
         }, 20000)
+    }
+
+    private fun copySafeReport() {
+        // Niciodata URL-uri complete, query params, tokenuri sau cookie-uri.
+        val details = "OME Live Test 0.4 - dupa Play\n" +
+            "Requests observed: $observedRequests\n" +
+            "Manifests: ${candidates.size}\n" +
+            "Last manifest host: $lastManifestHost\n" +
+            "Web HTTP error: ${lastHttpError ?: "none"}\n" +
+            "Web error: $webError\n" +
+            "Player running: ${player != null}\n" +
+            "First video frame: $firstFrame\n" +
+            "Last events:\n" + logLines.takeLast(16).joinToString("\n")
+        (getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager)
+            .setPrimaryClip(ClipData.newPlainText("OME safe diagnostic", details))
+        AlertDialog.Builder(this).setTitle("Raport copiat")
+            .setMessage(details).setPositiveButton("OK", null).show()
     }
 
     private fun dp(v: Int): Int = (v * resources.displayMetrics.density).toInt()
