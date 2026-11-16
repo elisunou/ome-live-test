@@ -288,7 +288,9 @@ class MainActivity : Activity() {
             }, LinearLayout.LayoutParams(0, dp(52), 1f))
         }
         root.addView(captureToolbar,
-            FrameLayout.LayoutParams(-1, -2, Gravity.TOP))
+            FrameLayout.LayoutParams(-1, -2, Gravity.BOTTOM).apply {
+                bottomMargin = dp(32)
+            })
 
         setContentView(root)
         web.loadUrl(site)
