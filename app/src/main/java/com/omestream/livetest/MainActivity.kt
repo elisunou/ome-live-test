@@ -58,6 +58,9 @@ class MainActivity : Activity() {
     private var player: ExoPlayer? = null
     private var selected: Candidate? = null
     private var firstFrame = false
+    private val sessionResolver = LiveSessionResolver()
+    private var lastFailedRequestType = "none"
+    private var lastFailedHost = "none"
     private val site = "https://antena1.live/antena-1-live/"
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -216,6 +219,8 @@ class MainActivity : Activity() {
                     lastHttpError = null
                     webError = "none"
                     firstFrame = false
+                    lastFailedRequestType = "none"
+                    lastFailedHost = "none"
                     loading.visibility = View.GONE
                     captureToolbar.visibility = View.VISIBLE
                     report("Captura pornita. Apasa Play pe pagina si asteapta 10 secunde.")
@@ -232,6 +237,7 @@ class MainActivity : Activity() {
                         "Web error: $webError\n" +
                         "Player running: ${player != null}\n" +
                         "First video frame: $firstFrame\n" +
+            "Last Media3 failure: $lastFailedRequestType host=$lastFailedHost\n" +
                         logLines.takeLast(10).joinToString("\n")
                     AlertDialog.Builder(this@MainActivity)
                         .setTitle("OME diagnostic")
@@ -305,7 +311,7 @@ class MainActivity : Activity() {
 
     private fun copySafeReport() {
         // Niciodata URL-uri complete, query params, tokenuri sau cookie-uri.
-        val details = "OME Live Test 0.4 - dupa Play\n" +
+        val details = "OME Live Test 0.6 - session diagnostics\n" +
             "Requests observed: $observedRequests\n" +
             "Manifests: ${candidates.size}\n" +
             "Last manifest host: $lastManifestHost\n" +
@@ -313,6 +319,7 @@ class MainActivity : Activity() {
             "Web error: $webError\n" +
             "Player running: ${player != null}\n" +
             "First video frame: $firstFrame\n" +
+            "Last Media3 failure: $lastFailedRequestType host=$lastFailedHost\n" +
             "Last events:\n" + logLines.takeLast(16).joinToString("\n")
         (getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager)
             .setPrimaryClip(ClipData.newPlainText("OME safe diagnostic", details))
@@ -350,15 +357,11 @@ class MainActivity : Activity() {
         firstFrame = false
         val uri = Uri.parse(media.url)
         // Cookies must be retrieved on the UI thread. They are not logged or exported.
-        val cookies = CookieManager.getInstance().getCookie(media.url)
-        val headers = mutableMapOf<String, String>()
-        media.headers.forEach { (key, value) ->
-            if (key.equals("Referer", true) || key.equals("Origin", true)) headers[key] = value
-        }
-        headers.putIfAbsent("Referer", site)
-        if (!cookies.isNullOrBlank()) headers["Cookie"] = cookies
-        val agent = media.headers.entries.firstOrNull { it.key.equals("User-Agent", true) }?.value
-            ?: web.settings.userAgentString
+        val resolved = sessionResolver.resolve(
+            media.url, media.headers, site, web.settings.userAgentString
+        )
+        val headers = resolved.headers
+        val agent = resolved.userAgent
         val factory = DefaultHttpDataSource.Factory()
             .setUserAgent(agent)
             .setDefaultRequestProperties(headers)
@@ -370,7 +373,8 @@ class MainActivity : Activity() {
         player = p
         video.player = p
         video.visibility = View.VISIBLE
-        report("Media3 preparing; cookiesPresent=${!cookies.isNullOrEmpty()}")
+        report("Resolver: host=${resolved.manifestHost} cookiesPresent=${resolved.cookiesPresent} signedQueryPresent=${resolved.signedQueryPresent}")
+        report("Media3 preparing")
         p.addListener(object : Player.Listener {
             override fun onPlaybackStateChanged(state: Int) {
                 report("Playback state=${when(state) { Player.STATE_IDLE -> "IDLE"; Player.STATE_BUFFERING -> "BUFFERING"; Player.STATE_READY -> "READY (not proof of picture)"; Player.STATE_ENDED -> "ENDED"; else -> state.toString() }}")
@@ -397,12 +401,26 @@ class MainActivity : Activity() {
                 var cause: Throwable? = error
                 var httpCode = "none"
                 while (cause != null) {
-                    if (cause is androidx.media3.datasource.HttpDataSource.InvalidResponseCodeException) httpCode = cause.responseCode.toString()
+                    if (cause is androidx.media3.datasource.HttpDataSource.InvalidResponseCodeException) {
+                        httpCode = cause.responseCode.toString()
+                        val failedUri = cause.dataSpec.uri
+                        lastFailedRequestType = sessionResolver.requestType(failedUri.toString())
+                        lastFailedHost = failedUri.host ?: "unknown"
+                    }
                     cause = cause.cause
                 }
-                report("PLAYER ERROR code=${error.errorCodeName} HTTP=$httpCode firstFrame=$firstFrame")
+                report("PLAYER ERROR code=${error.errorCodeName} HTTP=$httpCode stage=$lastFailedRequestType host=$lastFailedHost firstFrame=$firstFrame")
+                if (httpCode == "401" || httpCode == "403") {
+                    report("Access denied; a new authorized website session may be required")
+                }
                 main.post {
-                    if (player === p && !firstFrame) retryNext()
+                    if (player === p && !firstFrame) {
+                        if (httpCode == "401" || httpCode == "403") {
+                            stopPlayer()
+                            loading.visibility = View.VISIBLE
+                            loadingText.text = "Acces respins ($httpCode). Revino la pagina si porneste o sesiune valida."
+                        } else retryNext()
+                    }
                 }
             }
         })
