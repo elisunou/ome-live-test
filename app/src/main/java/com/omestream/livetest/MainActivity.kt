@@ -17,6 +17,8 @@ import android.webkit.CookieManager
 import android.webkit.WebResourceRequest
 import android.webkit.WebView
 import android.webkit.WebViewClient
+import android.widget.FrameLayout
+import android.widget.ProgressBar
 import android.widget.Button
 import android.widget.EditText
 import android.widget.LinearLayout
@@ -43,6 +45,9 @@ class MainActivity : Activity() {
     private lateinit var web: WebView
     private lateinit var video: PlayerView
     private lateinit var status: TextView
+    private lateinit var loading: LinearLayout
+    private lateinit var loadingText: TextView
+    private var attempted = mutableSetOf<String>()
     private var player: ExoPlayer? = null
     private var selected: Candidate? = null
     private var firstFrame = false
@@ -50,65 +55,137 @@ class MainActivity : Activity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        val root = LinearLayout(this).apply {
-            orientation = LinearLayout.VERTICAL
-            setBackgroundColor(0xFF10131A.toInt())
+
+        val root = FrameLayout(this).apply {
+            setBackgroundColor(Color.BLACK)
         }
-        val buttons = LinearLayout(this).apply { orientation = LinearLayout.HORIZONTAL }
-        fun action(name: String, task: () -> Unit) {
-            val button = Button(this).apply { text = name; setAllCaps(false); setOnClickListener { task() } }
-            buttons.addView(button, LinearLayout.LayoutParams(0, -2, 1f))
+
+        status = TextView(this)
+
+        web = WebView(this).apply {
+            settings.javaScriptEnabled = true
+            settings.domStorageEnabled = true
+            settings.mediaPlaybackRequiresUserGesture = false
+            settings.setSupportMultipleWindows(false)
+            settings.javaScriptCanOpenWindowsAutomatically = false
+
+            webViewClient = object : WebViewClient() {
+                override fun shouldInterceptRequest(
+                    view: WebView?,
+                    request: WebResourceRequest
+                ): android.webkit.WebResourceResponse? {
+                    val uri = request.url
+                    val path = uri.path.orEmpty().lowercase()
+                    val isMedia = uri.scheme == "https" &&
+                        (path.endsWith(".m3u8") ||
+                         path.endsWith(".mpd"))
+
+                    if (isMedia && candidates.none {
+                            it.url == uri.toString()
+                        }) {
+                        val candidate = Candidate(
+                            uri.toString(),
+                            request.requestHeaders.toMap()
+                        )
+                        candidates.add(candidate)
+
+                        main.post {
+                            report("Manifest detected: " + uri.host)
+                            if (player == null && !firstFrame) {
+                                selected = candidate
+                                attempted.add(candidate.url)
+                                loadingText.text = "Se conecteaza la transmisie..."
+                                playSelected()
+                            }
+                        }
+                    }
+                    return null
+                }
+
+                override fun onPageFinished(
+                    view: WebView?,
+                    url: String?
+                ) {
+                    report("Page loaded")
+                    view?.evaluateJavascript(
+                        "(function(){document.querySelectorAll('video').forEach(function(v){v.muted=true;v.play().catch(function(){});});})();",
+                        null
+                    )
+                }
+            }
         }
-        action("Open Antena") { stopPlayer(); selected = null; candidates.clear(); web.loadUrl(site); report("Page opened") }
-        action("Choose stream") { chooseStream() }
-        action("Play Media3") { playSelected() }
-        action("Copy log") {
-            val text = logLines.joinToString("\n")
-            (getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager)
-                .setPrimaryClip(ClipData.newPlainText("OME Live Test diagnostic", text))
-            report("Log copied (redacted)")
-        }
-        root.addView(buttons)
+
+        root.addView(
+            web,
+            FrameLayout.LayoutParams(-1, -1)
+        )
 
         video = PlayerView(this).apply {
             setBackgroundColor(Color.BLACK)
             useController = true
             visibility = View.GONE
         }
-        root.addView(video, LinearLayout.LayoutParams(-1, 0, 1f))
-        web = WebView(this).apply {
-            settings.javaScriptEnabled = true
-            settings.domStorageEnabled = true
-            settings.mediaPlaybackRequiresUserGesture = true
-            settings.setSupportMultipleWindows(false)
-            settings.javaScriptCanOpenWindowsAutomatically = false
-            webViewClient = object : WebViewClient() {
-                override fun shouldInterceptRequest(view: WebView?, request: WebResourceRequest): android.webkit.WebResourceResponse? {
-                    val uri = request.url
-                    val path = uri.path.orEmpty().lowercase()
-                    if (uri.scheme == "https" && (path.endsWith(".m3u8") || path.endsWith(".mpd"))) {
-                        if (candidates.none { it.url == uri.toString() }) {
-                            candidates.add(Candidate(uri.toString(), request.requestHeaders.toMap()))
-                            main.post { report("Media manifest observed: ${uri.host} type=${if (path.endsWith(".mpd")) "DASH" else "HLS"}; candidates=${candidates.size}") }
-                        }
-                    }
-                    return null // Never alter provider traffic.
-                }
-                override fun onPageFinished(view: WebView?, url: String?) { report("Page loaded: ${Uri.parse(url).host}") }
-            }
-        }
-        root.addView(web, LinearLayout.LayoutParams(-1, 0, 1f))
-        status = TextView(this).apply {
+
+        root.addView(
+            video,
+            FrameLayout.LayoutParams(-1, -1)
+        )
+
+        loadingText = TextView(this).apply {
+            text = "Se cauta sursa LIVE..."
             setTextColor(Color.WHITE)
-            setBackgroundColor(0xFF202631.toInt())
-            textSize = 12f
-            setPadding(16, 12, 16, 12)
-            movementMethod = android.text.method.ScrollingMovementMethod()
+            textSize = 17f
+            gravity = Gravity.CENTER
         }
-        root.addView(status, LinearLayout.LayoutParams(-1, dp(160)))
+
+        loading = LinearLayout(this).apply {
+            orientation = LinearLayout.VERTICAL
+            gravity = Gravity.CENTER
+            setBackgroundColor(0xFF101827.toInt())
+
+            addView(TextView(this@MainActivity).apply {
+                text = "OME STREAM"
+                textSize = 28f
+                setTextColor(Color.WHITE)
+                gravity = Gravity.CENTER
+                setPadding(0, 0, 0, dp(30))
+            })
+
+            addView(ProgressBar(this@MainActivity))
+
+            addView(loadingText, LinearLayout.LayoutParams(
+                -1, dp(70)
+            ))
+
+            addView(Button(this@MainActivity).apply {
+                text = "Reincarca transmisia"
+                setOnClickListener {
+                    stopPlayer()
+                    firstFrame = false
+                    selected = null
+                    attempted.clear()
+                    candidates.clear()
+                    loading.visibility = View.VISIBLE
+                    loadingText.text = "Se cauta sursa LIVE..."
+                    web.loadUrl(site)
+                }
+            })
+        }
+
+        root.addView(
+            loading,
+            FrameLayout.LayoutParams(-1, -1)
+        )
+
         setContentView(root)
-        report("Ready. Open Antena, interact with site, choose captured manifest.")
         web.loadUrl(site)
+
+        main.postDelayed({
+            if (!firstFrame && player == null) {
+                loadingText.text =
+                    "Sursa nu a fost detectata. Poti reincarca."
+            }
+        }, 20000)
     }
 
     private fun dp(v: Int): Int = (v * resources.displayMetrics.density).toInt()
@@ -181,6 +258,7 @@ class MainActivity : Activity() {
             }
             override fun onRenderedFirstFrame() {
                 firstFrame = true
+                loading.visibility = View.GONE
                 report("FIRST VIDEO FRAME RENDERED ✅")
             }
             override fun onPlayerError(error: PlaybackException) {
@@ -191,13 +269,38 @@ class MainActivity : Activity() {
                     cause = cause.cause
                 }
                 report("PLAYER ERROR code=${error.errorCodeName} HTTP=$httpCode firstFrame=$firstFrame")
+                main.post {
+                    if (player === p && !firstFrame) retryNext()
+                }
             }
         })
         val type = if (uri.path.orEmpty().lowercase().endsWith(".mpd")) MimeTypes.APPLICATION_MPD else MimeTypes.APPLICATION_M3U8
         p.setMediaItem(MediaItem.Builder().setUri(media.url).setMimeType(type).build())
         p.prepare()
         p.play()
-        main.postDelayed({ if (player === p && !firstFrame) report("No first video frame within 15 seconds; inspect tracks/codec/HTTP") }, 15_000)
+        main.postDelayed({
+            if (player === p && !firstFrame) retryNext()
+        }, 15_000)
+    }
+
+    private fun retryNext() {
+        if (firstFrame) return
+
+        val next = candidates.firstOrNull {
+            it.url !in attempted
+        }
+
+        if (next != null) {
+            attempted.add(next.url)
+            selected = next
+            loadingText.text = "Se incearca alta sursa..."
+            playSelected()
+        } else {
+            stopPlayer()
+            loading.visibility = View.VISIBLE
+            loadingText.text =
+                "Nu s-a putut reda sursa. Incearca reincarcarea."
+        }
     }
 
     private fun stopPlayer() {
