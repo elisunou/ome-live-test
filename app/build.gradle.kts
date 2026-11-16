@@ -4,7 +4,7 @@ plugins {
 }
 android {
     namespace = "com.omestream.livetest"
-    compileSdk = 35
+    compileSdk = 36
     defaultConfig {
         applicationId = "com.omestream.livetest"
         minSdk = 26
