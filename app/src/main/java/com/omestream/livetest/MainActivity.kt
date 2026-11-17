@@ -62,6 +62,7 @@ class MainActivity : Activity() {
     private var firstFrame = false
     private var webFirstFrame = false
     private var player: ExoPlayer? = null
+    private var loadingCoordinator: LiveTvLoadingCoordinator? = null
     private lateinit var web: WebView
     private lateinit var video: PlayerView
     private lateinit var root: LinearLayout
@@ -164,6 +165,8 @@ class MainActivity : Activity() {
     private fun removeFromParent(view: View) { (view.parent as? ViewGroup)?.removeView(view) }
 
     private fun buildUi() {
+        loadingCoordinator?.release()
+        loadingCoordinator = null
         val landscape = resources.configuration.orientation == Configuration.ORIENTATION_LANDSCAPE
         if (::root.isInitialized) {
             removeFromParent(web); removeFromParent(video)
@@ -201,6 +204,16 @@ class MainActivity : Activity() {
         val info = buildInfo()
         right.addView(info, if (landscape) LinearLayout.LayoutParams(dp(260), -1) else LinearLayout.LayoutParams(-1, dp(235)))
         setContentView(root)
+        loadingCoordinator = LiveTvLoadingCoordinator(
+            webView = web,
+            playerView = video,
+            loadingOverlay = overlay,
+            loadingMessage = loadingText,
+            onSessionRefreshRequested = { refreshAuthorizedSession() },
+            onPlaybackFailure = { error -> reportNativeFailure(error) }
+        )
+        player?.let { loadingCoordinator?.attachPlayer(it) }
+        if (firstFrame || webVisible) overlay.visibility = View.GONE
     }
 
     private fun buildChannelList(landscape: Boolean): View {
@@ -279,6 +292,7 @@ class MainActivity : Activity() {
     private fun openChannel(item: Channel, service: String) {
         channel = item; provider = service
         generation++
+        loadingCoordinator?.beginSourceChange(item.name)
         stopNative()
         sources.clear(); attempted.clear(); firstFrame = false; webFirstFrame = false
         requestCount.set(0); lastHttp = "none"; lastStage = "unknown"
@@ -302,6 +316,7 @@ class MainActivity : Activity() {
         webVisible = true
         web.visibility = View.VISIBLE
         overlay.visibility = View.GONE
+        loadingCoordinator?.showProviderInteraction()
         Toast.makeText(this, "Apasă Play pe site. Apoi alege Surse / Calitate.", Toast.LENGTH_LONG).show()
         inspectVideo(generation)
     }
@@ -337,6 +352,7 @@ class MainActivity : Activity() {
     }
 
     private fun playNative(source: Source) {
+        loadingCoordinator?.beginSourceChange(source.name)
         stopNative()
         firstFrame = false
         webVisible = false
@@ -362,6 +378,7 @@ class MainActivity : Activity() {
                 if (player !== p) return
                 firstFrame = true
                 overlay.visibility = View.GONE
+                web.visibility = View.INVISIBLE
             }
             override fun onPlayerError(error: PlaybackException) {
                 if (player !== p) return
@@ -379,14 +396,37 @@ class MainActivity : Activity() {
                     }
                     cause = cause.cause
                 }
-                stopNative()
-                overlay.visibility = View.VISIBLE
-                loadingText.text = "Media3: $lastHttp ($lastStage). Redeschide pagina pentru o sesiune autorizată."
+                // The coordinator decides whether to request one provider-session refresh.
+                // Never forge tokens or retry the same forbidden URL in a loop.
             }
         })
+        loadingCoordinator?.attachPlayer(p)
         val mime = if (Uri.parse(source.url).path.orEmpty().lowercase().endsWith(".mpd")) MimeTypes.APPLICATION_MPD else MimeTypes.APPLICATION_M3U8
         p.setMediaItem(MediaItem.Builder().setUri(source.url).setMimeType(mime).build())
         p.prepare(); p.play()
+    }
+
+    private fun refreshAuthorizedSession() {
+        // A clean page reload asks the provider to create/restore a normal authorized session.
+        // A fresh source must be detected before the user can retry Media3.
+        val currentPage = web.url
+        stopNative()
+        sources.clear()
+        attempted.clear()
+        webVisible = false
+        web.visibility = View.INVISIBLE
+        overlay.visibility = View.VISIBLE
+        loadingText.text = "Se pregătește transmisia… Reinițializăm sesiunea. Dacă este nevoie, apasă Play / sesiune."
+        if (!currentPage.isNullOrBlank()) web.reload()
+        else channel?.let { web.loadUrl(if (provider == "Antena Live") antenna else it.page) }
+    }
+
+    private fun reportNativeFailure(error: PlaybackException) {
+        stopNative()
+        webVisible = false
+        web.visibility = View.INVISIBLE
+        overlay.visibility = View.VISIBLE
+        loadingText.text = "Sursa nu a pornit ($lastHttp). Alege Surse / Calitate sau Play / sesiune."
     }
 
     private fun stopNative() {
@@ -408,6 +448,8 @@ class MainActivity : Activity() {
     }
     override fun onDestroy() {
         handler.removeCallbacksAndMessages(null)
+        loadingCoordinator?.release()
+        loadingCoordinator = null
         stopNative()
         web.destroy()
         super.onDestroy()
