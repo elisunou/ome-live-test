@@ -33,6 +33,10 @@ import androidx.media3.common.MediaItem;
 import androidx.media3.common.MimeTypes;
 import androidx.media3.common.PlaybackException;
 import androidx.media3.common.Player;
+import androidx.media3.common.C;
+import androidx.media3.exoplayer.analytics.AnalyticsListener;
+import androidx.media3.exoplayer.source.LoadEventInfo;
+import androidx.media3.exoplayer.source.MediaLoadData;
 import androidx.media3.datasource.DefaultHttpDataSource;
 import androidx.media3.datasource.HttpDataSource;
 import androidx.media3.datasource.ResolvingDataSource;
@@ -70,6 +74,7 @@ public final class RdsLiveActivity extends Activity {
     private PlayerView video;
     private ExoPlayer player;
     private TextView status;
+    private TextView diagnosticLabel;
     private FrameLayout stage;
     private LinearLayout chrome;
     private Button sourceButton, qualityButton, fillButton;
@@ -111,6 +116,52 @@ public final class RdsLiveActivity extends Activity {
     private boolean tvControls;
     private OnBackInvokedCallback backCallback;
     private long bufferingSince, readySince;
+    // Diagnostic counters only: never show token values, URLs or cookies.
+    private long mediaBytesReceived;
+    private boolean firstVideoFrame;
+    private int lastMediaHttpCode;
+    private boolean sessionTimeoutNotified;
+    private int sessionTimeoutGeneration;
+    private String sessionIssue = "";
+    private int reportedTokenRequests = -1, reportedTokenGranted = -1, reportedTokenRejected = -1;
+    private final Runnable sessionWatchdog = () -> {
+        if (closed || stopped || closingPlayback || iptvOrgSelected || externalSiteSelected
+                || sessionTimeoutGeneration != pageGeneration || session != null) return;
+        sessionTimeoutNotified = true;
+        if (reportedTokenGranted > 0) sessionIssue = "Token raportat, dar nu s-a obținut o sursă utilizabilă";
+        else if (reportedTokenRequests > 0) sessionIssue = "Token solicitat, dar nu a fost acordat";
+        else sessionIssue = "Pagina nu a solicitat încă un token de redare";
+        updateDiagnostic();
+        showProviderAction(sessionIssue + ". Apasă Reîncarcă sau alege altă sursă.");
+    };
+    private void updateDiagnostic() {
+        if (diagnosticLabel == null || closed) return;
+        String token = "Cereri token: " + (reportedTokenRequests < 0 ? "?" : reportedTokenRequests)
+                + " · acordate: " + (reportedTokenGranted < 0 ? "?" : reportedTokenGranted)
+                + " · respinse: " + (reportedTokenRejected < 0 ? "?" : reportedTokenRejected);
+        String transfer = "Media3: " + mediaBytesReceived + " octeți media"
+                + " · primul cadru: " + (firstVideoFrame ? "DA" : "NU");
+        String error = lastMediaHttpCode > 0 ? " · HTTP " + lastMediaHttpCode : "";
+        diagnosticLabel.setText(token + "\n" + transfer + error
+                + (sessionIssue.isEmpty() ? "" : "\n" + sessionIssue));
+    }
+    private void watchSessionAfterPageLoad() {
+        if (session != null || closed || stopped || externalSiteSelected || iptvOrgSelected) return;
+        main.removeCallbacks(sessionWatchdog);
+        sessionTimeoutGeneration = pageGeneration;
+        sessionTimeoutNotified = false;
+        main.postDelayed(sessionWatchdog, 25000L);
+    }
+    private void resetSessionDiagnostic() {
+        main.removeCallbacks(sessionWatchdog);
+        reportedTokenRequests = reportedTokenGranted = reportedTokenRejected = -1;
+        mediaBytesReceived = 0;
+        firstVideoFrame = false;
+        lastMediaHttpCode = 0;
+        sessionIssue = "";
+        sessionTimeoutNotified = false;
+        updateDiagnostic();
+    }
     private final Runnable hidePlaybackControls = () -> {
         if (!closed && !closingPlayback && player != null
                 && player.getPlaybackState() == Player.STATE_READY
@@ -214,6 +265,16 @@ public final class RdsLiveActivity extends Activity {
         status.setTextColor(Color.WHITE);
         status.setPadding(12, 8, 12, 8);
         chrome.addView(status);
+        diagnosticLabel = new TextView(this);
+        diagnosticLabel.setTextColor(0xFF91D9CC);
+        diagnosticLabel.setTextSize(11f);
+        diagnosticLabel.setPadding(12, 0, 12, 6);
+        diagnosticLabel.setOnClickListener(v -> new AlertDialog.Builder(this)
+                .setTitle("Diagnostic Live TV")
+                .setMessage(diagnosticLabel.getText())
+                .setPositiveButton("OK", null).show());
+        chrome.addView(diagnosticLabel);
+        updateDiagnostic();
         stage = new FrameLayout(this);
         root.addView(stage, new FrameLayout.LayoutParams(-1, -1));
         root.addView(chrome, new FrameLayout.LayoutParams(-1, -2, android.view.Gravity.TOP));
@@ -279,6 +340,7 @@ public final class RdsLiveActivity extends Activity {
                     }
                 }
                 session = null; observedRevision = 0; retries = 0;
+                resetSessionDiagnostic();
                 if (player != null) player.stop();
                 if (externalSiteSelected) showPreparing("Se pregătește TVZone…");
                 else if (nativeMode && nativeRequested) showPreparing("Se pregătește transmisia…");
@@ -327,8 +389,10 @@ public final class RdsLiveActivity extends Activity {
                                         : "Canalul încă se pregătește. Încearcă din nou sau alege altă sursă.");
                         }, 20000);
                     } else showSession("Antena Live · apasă Pornește pentru a iniția sesiunea site-ului.");
-                } else status.setText(channelTitle
-                        + " · Se pregătește redarea… Dacă apare un cod QR, confirmă-l cu telefonul.");
+                } else {
+                    status.setText(channelTitle + " · Se pregătește redarea…");
+                    watchSessionAfterPageLoad();
+                }
             }
             @Override public void onReceivedError(WebView view, WebResourceRequest request,
                                                    WebResourceError error) {
@@ -451,6 +515,7 @@ public final class RdsLiveActivity extends Activity {
         antennaReloadStopped = false;
         rapidAntennaReloads = 0;
         pageGeneration++; retries = 0; observedRevision = 0; session = null;
+        resetSessionDiagnostic();
         loading = true; bufferingSince = 0;
         if (player != null) player.stop();
         if (nativeMode && nativeRequested) showPreparing("Se pregătește transmisia…");
@@ -1044,6 +1109,10 @@ public final class RdsLiveActivity extends Activity {
         int tokenRequests = json.optInt("tokenRequests", -1);
         int tokenGranted = json.optInt("tokenGranted", -1);
         int tokenRejected = json.optInt("tokenRejected", -1);
+        reportedTokenRequests = tokenRequests;
+        reportedTokenGranted = tokenGranted;
+        reportedTokenRejected = tokenRejected;
+        updateDiagnostic();
         if (tokenRequests != loggedTokenRequests || tokenGranted != loggedTokenGranted
                 || tokenRejected != loggedTokenRejected) {
             loggedTokenRequests = tokenRequests;
@@ -1076,6 +1145,7 @@ public final class RdsLiveActivity extends Activity {
                 // This is a provider-side session limit. Reconnecting here only
                 // creates another request and cannot free an existing session.
                 nativeRequested = false;
+                main.removeCallbacks(sessionWatchdog);
                 showProviderLimit();
                 return;
             }
@@ -1101,6 +1171,9 @@ public final class RdsLiveActivity extends Activity {
         observedRevision = revision;
         RdsLiveStream previous = session;
         session = fresh;
+        main.removeCallbacks(sessionWatchdog);
+        sessionIssue = "";
+        updateDiagnostic();
         if (!nativeMode || !nativeRequested) return;
         // Standard token renewals update the data-source resolver without
         // flushing buffered video. A provider URL/path change needs a new item.
@@ -1146,6 +1219,20 @@ public final class RdsLiveActivity extends Activity {
                         .setLoadErrorHandlingPolicy(new DefaultLoadErrorHandlingPolicy(5)))
                 .build();
         video.setPlayer(player);
+        player.addAnalyticsListener(new AnalyticsListener() {
+            @Override public void onLoadCompleted(AnalyticsListener.EventTime eventTime,
+                    LoadEventInfo info, MediaLoadData data) {
+                if (data.dataType == C.DATA_TYPE_MEDIA && info.bytesLoaded > 0) {
+                    mediaBytesReceived += info.bytesLoaded;
+                    updateDiagnostic();
+                }
+            }
+            @Override public void onRenderedFirstFrame(AnalyticsListener.EventTime eventTime,
+                    Object output, long renderTimeMs) {
+                firstVideoFrame = true;
+                updateDiagnostic();
+            }
+        });
         player.addListener(new Player.Listener() {
             @Override public void onPlaybackStateChanged(int state) {
                 if (state == Player.STATE_READY) {
@@ -1183,6 +1270,9 @@ public final class RdsLiveActivity extends Activity {
                         androidx.media3.datasource.HttpDataSource.InvalidResponseCodeException httpError =
                                 (androidx.media3.datasource.HttpDataSource.InvalidResponseCodeException) problem;
                         Uri failed = httpError.dataSpec.uri;
+                        lastMediaHttpCode = httpError.responseCode;
+                        sessionIssue = "Media3 a primit HTTP " + lastMediaHttpCode;
+                        updateDiagnostic();
                         RdsLiveStream current = session;
                         String reason = "";
                         try { reason = new JSONObject(new String(httpError.responseBody, "UTF-8")).optString("error"); }

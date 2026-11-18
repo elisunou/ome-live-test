@@ -1,7 +1,7 @@
 name: Build OME Live original Java
 on:
   push:
-    branches: [main, original-java-test]
+    branches: [main, original-java-test, java-diagnostics]
   workflow_dispatch:
 jobs:
   build:
