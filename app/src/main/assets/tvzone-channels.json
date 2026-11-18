@@ -1,0 +1,1402 @@
+[
+  {
+    "id": "tvzone:antena1",
+    "name": "Antena1",
+    "category": "generaliste",
+    "logo": "https://www.tvzonehd.com/img/Antena11.webp",
+    "tvZonePage": "https://www.tvzonehd.com/antena-1/"
+  },
+  {
+    "id": "tvzone:primahistory",
+    "name": "Prima History",
+    "category": "documentare",
+    "logo": "https://www.tvzonehd.com/img/prima-history.webp",
+    "tvZonePage": "https://www.tvzonehd.com/primahistory/"
+  },
+  {
+    "id": "tvzone:asiatv",
+    "name": "Asia Tv",
+    "category": "filme",
+    "logo": "https://www.tvzonehd.com/img/Asia_TV.webp",
+    "tvZonePage": "https://www.tvzonehd.com/asiatv/"
+  },
+  {
+    "id": "tvzone:beautyon",
+    "name": "Beauty.ON",
+    "category": "generaliste",
+    "logo": "https://www.tvzonehd.com/img/Beauty.on.webp",
+    "tvZonePage": "https://www.tvzonehd.com/beautyon/"
+  },
+  {
+    "id": "tvzone:antenasport",
+    "name": "Antena Sport",
+    "category": "sport",
+    "logo": "https://www.tvzonehd.com/img/AntenaSport.webp",
+    "tvZonePage": "https://www.tvzonehd.com/antenasport/"
+  },
+  {
+    "id": "tvzone:filmboxstars",
+    "name": "Filmbox Love & Crime",
+    "category": "filme",
+    "logo": "https://www.tvzonehd.com/img/FilmboxLoveandCrime.webp",
+    "tvZonePage": "https://www.tvzonehd.com/filmboxstars/"
+  },
+  {
+    "id": "tvzone:cinemaratonmoldova",
+    "name": "Cinemaraton Moldova",
+    "category": "filme",
+    "logo": "https://www.tvzonehd.com/img/CinemaratonMD.webp",
+    "tvZonePage": "https://www.tvzonehd.com/cinemaratonmoldova/"
+  },
+  {
+    "id": "tvzone:primatvmoldova",
+    "name": "Prima TV Moldova",
+    "category": "generaliste",
+    "logo": "https://www.tvzonehd.com/img/primatv-moldova.webp",
+    "tvZonePage": "https://www.tvzonehd.com/primatvmoldova/"
+  },
+  {
+    "id": "tvzone:prima4k",
+    "name": "Prima4k",
+    "category": "sport",
+    "logo": "https://www.tvzonehd.com/img/PrimaSport4K.webp",
+    "tvZonePage": "https://www.tvzonehd.com/prima4k/"
+  },
+  {
+    "id": "tvzone:tralaladsn",
+    "name": "Tralala desene animate",
+    "category": "copii",
+    "logo": "https://www.tvzonehd.com/img/tralaladsn.webp",
+    "tvZonePage": "https://www.tvzonehd.com/tralaladsn/"
+  },
+  {
+    "id": "tvzone:filmix",
+    "name": "Filmix",
+    "category": "filme",
+    "logo": "https://www.tvzonehd.com/img/Filmmix.webp",
+    "tvZonePage": "https://www.tvzonehd.com/filmix/"
+  },
+  {
+    "id": "tvzone:orizont",
+    "name": "Orizont",
+    "category": "muzica",
+    "logo": "https://www.tvzonehd.com/img/orizont.webp",
+    "tvZonePage": "https://www.tvzonehd.com/orizont/"
+  },
+  {
+    "id": "tvzone:entertainment",
+    "name": "E! Entertainment",
+    "category": "documentare",
+    "logo": "https://www.tvzonehd.com/img/E!.webp",
+    "tvZonePage": "https://www.tvzonehd.com/entertainment/"
+  },
+  {
+    "id": "tvzone:paprika",
+    "name": "Paprika Tv",
+    "category": "generaliste",
+    "logo": "https://www.tvzonehd.com/img/ppk.webp",
+    "tvZonePage": "https://www.tvzonehd.com/paprika/"
+  },
+  {
+    "id": "tvzone:tvrinfo",
+    "name": "Tvr Info",
+    "category": "generaliste",
+    "logo": "https://www.tvzonehd.com/img/TVRinfo.webp",
+    "tvZonePage": "https://www.tvzonehd.com/tvrinfo/"
+  },
+  {
+    "id": "tvzone:tvrfolclorr",
+    "name": "Tvr Folclor",
+    "category": "muzica",
+    "logo": "https://www.tvzonehd.com/img/TVRfolclor.webp",
+    "tvZonePage": "https://www.tvzonehd.com/tvrfolclorr/"
+  },
+  {
+    "id": "tvzone:raspodia",
+    "name": "Raspodia",
+    "category": "muzica",
+    "logo": "https://www.tvzonehd.com/img/Raspodia.webp",
+    "tvZonePage": "https://www.tvzonehd.com/raspodia/"
+  },
+  {
+    "id": "tvzone:liratv",
+    "name": "Lira Tv",
+    "category": "muzica",
+    "logo": "https://www.tvzonehd.com/img/lira.webp",
+    "tvZonePage": "https://www.tvzonehd.com/liratv/"
+  },
+  {
+    "id": "tvzone:travelmixt",
+    "name": "Travel Mixt",
+    "category": "documentare",
+    "logo": "https://www.tvzonehd.com/img/Travelmix.webp",
+    "tvZonePage": "https://www.tvzonehd.com/travelmixt/"
+  },
+  {
+    "id": "tvzone:digiworld",
+    "name": "Digi World",
+    "category": "documentare",
+    "logo": "https://www.tvzonehd.com/img/DigiWorld.webp",
+    "tvZonePage": "https://www.tvzonehd.com/digiworld/"
+  },
+  {
+    "id": "tvzone:digilife",
+    "name": "Digi Life",
+    "category": "documentare",
+    "logo": "https://www.tvzonehd.com/img/DigiLifee.webp",
+    "tvZonePage": "https://www.tvzonehd.com/digilife/"
+  },
+  {
+    "id": "tvzone:muzicchannel",
+    "name": "Music Channel",
+    "category": "muzica",
+    "logo": "https://www.tvzonehd.com/img/MusicChannel.webp",
+    "tvZonePage": "https://www.tvzonehd.com/muzicchannel/"
+  },
+  {
+    "id": "tvzone:utv",
+    "name": "UTV",
+    "category": "muzica",
+    "logo": "https://www.tvzonehd.com/img/UTV.webp",
+    "tvZonePage": "https://www.tvzonehd.com/utv/"
+  },
+  {
+    "id": "tvzone:medikatv",
+    "name": "Medika TV",
+    "category": "documentare",
+    "logo": "https://www.tvzonehd.com/img/medika_tv.webp",
+    "tvZonePage": "https://www.tvzonehd.com/medikatv/"
+  },
+  {
+    "id": "tvzone:emitv",
+    "name": "EMI TV",
+    "category": "muzica",
+    "logo": "https://www.tvzonehd.com/img/emi.webp",
+    "tvZonePage": "https://www.tvzonehd.com/emitv/"
+  },
+  {
+    "id": "tvzone:horatv",
+    "name": "Hora TV",
+    "category": "muzica",
+    "logo": "https://www.tvzonehd.com/img/hora.webp",
+    "tvZonePage": "https://www.tvzonehd.com/horatv/"
+  },
+  {
+    "id": "tvzone:mrbean",
+    "name": "Mr. Bean",
+    "category": "generaliste",
+    "logo": "https://www.tvzonehd.com/img/MRBEAN.webp",
+    "tvZonePage": "https://www.tvzonehd.com/mrbean/"
+  },
+  {
+    "id": "tvzone:exploris",
+    "name": "Exploris",
+    "category": "documentare",
+    "logo": "https://www.tvzonehd.com/img/exploris.webp",
+    "tvZonePage": "https://www.tvzonehd.com/exploris/"
+  },
+  {
+    "id": "tvzone:camerasmile",
+    "name": "Camera Smile",
+    "category": "generaliste",
+    "logo": "https://www.tvzonehd.com/img/camerasmile.webp",
+    "tvZonePage": "https://www.tvzonehd.com/camerasmile/"
+  },
+  {
+    "id": "tvzone:rotvvalencia",
+    "name": "ROTV Valencia",
+    "category": "generaliste",
+    "logo": "https://www.tvzonehd.com/img/ROtvValencia.webp",
+    "tvZonePage": "https://www.tvzonehd.com/rotvvalencia/"
+  },
+  {
+    "id": "tvzone:galaumorului",
+    "name": "Gala Umorului",
+    "category": "generaliste",
+    "logo": "https://www.tvzonehd.com/img/GalaUmorului.webp",
+    "tvZonePage": "https://www.tvzonehd.com/galaumorului/"
+  },
+  {
+    "id": "tvzone:impacttv",
+    "name": "Impact TV",
+    "category": "muzica",
+    "logo": "https://www.tvzonehd.com/img/impact.webp",
+    "tvZonePage": "https://www.tvzonehd.com/impacttv/"
+  },
+  {
+    "id": "tvzone:tequila",
+    "name": "Tequila Muzic",
+    "category": "muzica",
+    "logo": "https://www.tvzonehd.com/img/Tequila.webp",
+    "tvZonePage": "https://www.tvzonehd.com/tequila/"
+  },
+  {
+    "id": "tvzone:filmefantezie",
+    "name": "Filme Fantezie",
+    "category": "filme",
+    "logo": "https://www.tvzonehd.com/img/Fantez.webp",
+    "tvZonePage": "https://www.tvzonehd.com/filmefantezie/"
+  },
+  {
+    "id": "tvzone:eurosport4k",
+    "name": "Eurosport 4k",
+    "category": "sport",
+    "logo": "https://www.tvzonehd.com/img/euro4k.webp",
+    "tvZonePage": "https://www.tvzonehd.com/eurosport4k/"
+  },
+  {
+    "id": "tvzone:western",
+    "name": "Filme Western",
+    "category": "filme",
+    "logo": "https://www.tvzonehd.com/img/westernn.webp",
+    "tvZonePage": "https://www.tvzonehd.com/western/"
+  },
+  {
+    "id": "tvzone:nationaltv2",
+    "name": "National TV 2 HD",
+    "category": "generaliste",
+    "logo": "https://www.tvzonehd.com/img/tvn2.webp",
+    "tvZonePage": "https://www.tvzonehd.com/nationaltv2/"
+  },
+  {
+    "id": "tvzone:favorit2",
+    "name": "Favorit Tv 2",
+    "category": "muzica",
+    "logo": "https://www.tvzonehd.com/img/favtv2.webp",
+    "tvZonePage": "https://www.tvzonehd.com/favorit2/"
+  },
+  {
+    "id": "tvzone:chefiro",
+    "name": "Chefi",
+    "category": "generaliste",
+    "logo": "https://www.tvzonehd.com/img/chefi.webp",
+    "tvZonePage": "https://www.tvzonehd.com/chefiro/"
+  },
+  {
+    "id": "tvzone:commandotv",
+    "name": "Commando TV",
+    "category": "filme",
+    "logo": "https://www.tvzonehd.com/img/comnando.webp",
+    "tvZonePage": "https://www.tvzonehd.com/commandotv/"
+  },
+  {
+    "id": "tvzone:metropolatv",
+    "name": "Metropola Tv",
+    "category": "generaliste",
+    "logo": "https://www.tvzonehd.com/img/MetropolaTV-1.webp",
+    "tvZonePage": "https://www.tvzonehd.com/metropolatv/"
+  },
+  {
+    "id": "tvzone:pinkfilm",
+    "name": "Pink  Film",
+    "category": "filme",
+    "logo": "https://www.tvzonehd.com/img/Pink.webp",
+    "tvZonePage": "https://www.tvzonehd.com/pinkfilm/"
+  },
+  {
+    "id": "tvzone:selection1",
+    "name": "Selection1",
+    "category": "filme",
+    "logo": "https://www.tvzonehd.com/img/Selection1.webp",
+    "tvZonePage": "https://www.tvzonehd.com/selection1/"
+  },
+  {
+    "id": "tvzone:argotv",
+    "name": "Agro Tv",
+    "category": "generaliste",
+    "logo": "https://www.tvzonehd.com/img/argoo-removebg-preview.webp",
+    "tvZonePage": "https://www.tvzonehd.com/argotv/"
+  },
+  {
+    "id": "tvzone:agrotvmd",
+    "name": "Agro Tv Moldova",
+    "category": "generaliste",
+    "logo": "https://www.tvzonehd.com/img/agrotvmd-removebg-preview.webp",
+    "tvZonePage": "https://www.tvzonehd.com/agrotvmd/"
+  },
+  {
+    "id": "tvzone:jobtv",
+    "name": "Job Tv",
+    "category": "generaliste",
+    "logo": "https://www.tvzonehd.com/img/job-removebg-preview.webp",
+    "tvZonePage": "https://www.tvzonehd.com/jobtv/"
+  },
+  {
+    "id": "tvzone:tele7abc",
+    "name": "Tele 7 ABC",
+    "category": "generaliste",
+    "logo": "https://www.tvzonehd.com/img/Tele7abc-removebg-preview.webp",
+    "tvZonePage": "https://www.tvzonehd.com/tele7abc/"
+  },
+  {
+    "id": "tvzone:alephnews",
+    "name": "Aleph News",
+    "category": "stiri",
+    "logo": "https://www.tvzonehd.com/img/Alephnew2.webp",
+    "tvZonePage": "https://www.tvzonehd.com/alephnews/"
+  },
+  {
+    "id": "tvzone:proofi24",
+    "name": "Profi 24",
+    "category": "stiri",
+    "logo": "https://www.tvzonehd.com/img/profi24.webp",
+    "tvZonePage": "https://www.tvzonehd.com/proofi24/"
+  },
+  {
+    "id": "tvzone:busuioctv",
+    "name": "Busioc TV",
+    "category": "muzica",
+    "logo": "https://www.tvzonehd.com/img/busuioc-removebg-preview.webp",
+    "tvZonePage": "https://www.tvzonehd.com/busuioctv/"
+  },
+  {
+    "id": "tvzone:noroctv",
+    "name": "Noroc Tv",
+    "category": "muzica",
+    "logo": "https://www.tvzonehd.com/img/Noroc_TV.webp",
+    "tvZonePage": "https://www.tvzonehd.com/noroctv/"
+  },
+  {
+    "id": "tvzone:moldova1",
+    "name": "Moldova 1",
+    "category": "generaliste",
+    "logo": "https://www.tvzonehd.com/img/moldova1-removebg-preview.webp",
+    "tvZonePage": "https://www.tvzonehd.com/moldova1/"
+  },
+  {
+    "id": "tvzone:moldova2",
+    "name": "Moldova 2",
+    "category": "generaliste",
+    "logo": "https://www.tvzonehd.com/img/Moldova_2.webp",
+    "tvZonePage": "https://www.tvzonehd.com/moldova2/"
+  },
+  {
+    "id": "tvzone:realitateamd",
+    "name": "Realitatea Moldova",
+    "category": "generaliste",
+    "logo": "https://www.tvzonehd.com/img/realitateamd.webp",
+    "tvZonePage": "https://www.tvzonehd.com/realitateamd/"
+  },
+  {
+    "id": "tvzone:barazatv",
+    "name": "Baraza TV Greek Music",
+    "category": "muzica",
+    "logo": "https://www.tvzonehd.com/img/barazatv.webp",
+    "tvZonePage": "https://www.tvzonehd.com/barazatv/"
+  },
+  {
+    "id": "tvzone:zoom",
+    "name": "Zoom Tv",
+    "category": "generaliste",
+    "logo": "https://www.tvzonehd.com/img/zooomtv.webp",
+    "tvZonePage": "https://www.tvzonehd.com/zoom/"
+  },
+  {
+    "id": "tvzone:moozdance",
+    "name": "Mooz Dance",
+    "category": "muzica",
+    "logo": "https://www.tvzonehd.com/img/moozdancee.webp",
+    "tvZonePage": "https://www.tvzonehd.com/moozdance/"
+  },
+  {
+    "id": "tvzone:rocktv",
+    "name": "Rock tv",
+    "category": "muzica",
+    "logo": "https://www.tvzonehd.com/img/Rocktv.webp",
+    "tvZonePage": "https://www.tvzonehd.com/rocktv/"
+  },
+  {
+    "id": "tvzone:bollywoodfilm",
+    "name": "Bollywood FILM",
+    "category": "filme",
+    "logo": "https://www.tvzonehd.com/img/BollwoodFilm.webp",
+    "tvZonePage": "https://www.tvzonehd.com/bollywoodfilm/"
+  },
+  {
+    "id": "tvzone:davinci",
+    "name": "Da Vinci",
+    "category": "copii",
+    "logo": "https://www.tvzonehd.com/img/logo_cast_da_vinci.webp",
+    "tvZonePage": "https://www.tvzonehd.com/davinci/"
+  },
+  {
+    "id": "tvzone:docubox",
+    "name": "DocuBox",
+    "category": "documentare",
+    "logo": "https://www.tvzonehd.com/img/DocuBox.webp",
+    "tvZonePage": "https://www.tvzonehd.com/docubox/"
+  },
+  {
+    "id": "tvzone:clasiccartoons",
+    "name": "Classic Cartoons",
+    "category": "copii",
+    "logo": "https://www.tvzonehd.com/img/cartoons.webp",
+    "tvZonePage": "https://www.tvzonehd.com/clasiccartoons/"
+  },
+  {
+    "id": "tvzone:ppv4",
+    "name": "PPV 4",
+    "category": "sport",
+    "logo": "https://www.tvzonehd.com/img/PPV4.webp",
+    "tvZonePage": "https://www.tvzonehd.com/ppv4/"
+  },
+  {
+    "id": "tvzone:digi4k",
+    "name": "Digi 4k",
+    "category": "sport",
+    "logo": "https://www.tvzonehd.com/img/DIGI-4K-posturi.webp",
+    "tvZonePage": "https://www.tvzonehd.com/digi4k/"
+  },
+  {
+    "id": "tvzone:wesportmd",
+    "name": "We Sport MD",
+    "category": "sport",
+    "logo": "https://www.tvzonehd.com/img/wwsport.webp",
+    "tvZonePage": "https://www.tvzonehd.com/wesportmd/"
+  },
+  {
+    "id": "tvzone:insula",
+    "name": "Insula Iubirii",
+    "category": "generaliste",
+    "logo": "https://www.tvzonehd.com/img/insula.webp",
+    "tvZonePage": "https://www.tvzonehd.com/insula/"
+  },
+  {
+    "id": "tvzone:canalsud",
+    "name": "Canal Sud",
+    "category": "generaliste",
+    "logo": "https://www.tvzonehd.com/img/channels4_profile.webp",
+    "tvZonePage": "https://www.tvzonehd.com/canalsud/"
+  },
+  {
+    "id": "tvzone:moozro",
+    "name": "Mooz Ro",
+    "category": "muzica",
+    "logo": "https://www.tvzonehd.com/img/mooz-ro.png",
+    "tvZonePage": "https://www.tvzonehd.com/moozro/"
+  },
+  {
+    "id": "tvzone:moozhits",
+    "name": "Mooz Hits",
+    "category": "muzica",
+    "logo": "https://www.tvzonehd.com/img/mooz-hits.png",
+    "tvZonePage": "https://www.tvzonehd.com/moozhits/"
+  },
+  {
+    "id": "tvzone:moozlove",
+    "name": "Mooz Love",
+    "category": "muzica",
+    "logo": "https://www.tvzonehd.com/img/mooz-love.png",
+    "tvZonePage": "https://www.tvzonehd.com/moozlove/"
+  },
+  {
+    "id": "tvzone:moozretro",
+    "name": "moozretro",
+    "category": "muzica",
+    "logo": "https://www.tvzonehd.com/img/mooz-retro.png",
+    "tvZonePage": "https://www.tvzonehd.com/moozretro/"
+  },
+  {
+    "id": "tvzone:cinethronix",
+    "name": "Cinethronix",
+    "category": "generaliste",
+    "logo": "https://www.tvzonehd.com/img/download (3).webp",
+    "tvZonePage": "https://www.tvzonehd.com/cinethronix/"
+  },
+  {
+    "id": "tvzone:protv",
+    "name": "PRO TV",
+    "category": "generaliste",
+    "logo": "https://www.tvzonehd.com/img/Protv.webp",
+    "tvZonePage": "https://www.tvzonehd.com/protv/"
+  },
+  {
+    "id": "tvzone:hbo",
+    "name": "HBO 1",
+    "category": "filme",
+    "logo": "https://www.tvzonehd.com/img/HbO.webp",
+    "tvZonePage": "https://www.tvzonehd.com/hbo/"
+  },
+  {
+    "id": "tvzone:primatv",
+    "name": "Prima TV",
+    "category": "generaliste",
+    "logo": "https://www.tvzonehd.com/img/primatv.webp",
+    "tvZonePage": "https://www.tvzonehd.com/prima-tv/"
+  },
+  {
+    "id": "tvzone:procinema",
+    "name": "Pro Cinema",
+    "category": "generaliste",
+    "logo": "https://www.tvzonehd.com/img/Pro-Cinema.webp",
+    "tvZonePage": "https://www.tvzonehd.com/procinema/"
+  },
+  {
+    "id": "tvzone:tvr2",
+    "name": "TVR 2",
+    "category": "generaliste",
+    "logo": "https://www.tvzonehd.com/img/Tvr2hd.webp",
+    "tvZonePage": "https://www.tvzonehd.com/tvr-2/"
+  },
+  {
+    "id": "tvzone:lasfierbinti",
+    "name": "Las Fierbinti",
+    "category": "generaliste",
+    "logo": "https://www.tvzonehd.com/img/LasFierbinti.webp",
+    "tvZonePage": "https://www.tvzonehd.com/lasfierbinti/"
+  },
+  {
+    "id": "tvzone:b1tv",
+    "name": "B1 TV",
+    "category": "stiri",
+    "logo": "https://www.tvzonehd.com/img/b1tv.webp",
+    "tvZonePage": "https://www.tvzonehd.com/b1/"
+  },
+  {
+    "id": "tvzone:cinemaratonplus",
+    "name": "Cinemaraton Plus",
+    "category": "filme",
+    "logo": "https://www.tvzonehd.com/img/Cinemaratonplus.webp",
+    "tvZonePage": "https://www.tvzonehd.com/cinemaraton-plus/"
+  },
+  {
+    "id": "tvzone:diva",
+    "name": "Diva",
+    "category": "filme",
+    "logo": "https://www.tvzonehd.com/img/Divahd.webp",
+    "tvZonePage": "https://www.tvzonehd.com/diva/"
+  },
+  {
+    "id": "tvzone:filmboxfamily",
+    "name": "FilmBox Comedy",
+    "category": "filme",
+    "logo": "https://www.tvzonehd.com/img/FilmBoxComedy.webp",
+    "tvZonePage": "https://www.tvzonehd.com/filmboxfamily/"
+  },
+  {
+    "id": "tvzone:nationaltv",
+    "name": "National TV",
+    "category": "generaliste",
+    "logo": "https://www.tvzonehd.com/img/Ntv.webp",
+    "tvZonePage": "https://www.tvzonehd.com/national-tv/"
+  },
+  {
+    "id": "tvzone:protvinternational",
+    "name": "Pro Tv International",
+    "category": "generaliste",
+    "logo": "https://www.tvzonehd.com/img/ProTvInt.webp",
+    "tvZonePage": "https://www.tvzonehd.com/protv-international/"
+  },
+  {
+    "id": "tvzone:primaworld",
+    "name": "Prima World",
+    "category": "documentare",
+    "logo": "https://www.tvzonehd.com/img/Prima-World.webp",
+    "tvZonePage": "https://www.tvzonehd.com/primaworld/"
+  },
+  {
+    "id": "tvzone:axn",
+    "name": "AXN",
+    "category": "filme",
+    "logo": "https://www.tvzonehd.com/img/AXN.webp",
+    "tvZonePage": "https://www.tvzonehd.com/axn-hd/"
+  },
+  {
+    "id": "tvzone:acasatv",
+    "name": "Acasa TV",
+    "category": "generaliste",
+    "logo": "https://www.tvzonehd.com/img/AcasatvFhd.webp",
+    "tvZonePage": "https://www.tvzonehd.com/acasa-tv/"
+  },
+  {
+    "id": "tvzone:cinemax",
+    "name": "Cinemax 1",
+    "category": "filme",
+    "logo": "https://www.tvzonehd.com/img/CinemaXfhd.webp",
+    "tvZonePage": "https://www.tvzonehd.com/cinemax/"
+  },
+  {
+    "id": "tvzone:disney",
+    "name": "Disney Channel",
+    "category": "copii",
+    "logo": "https://www.tvzonehd.com/img/disney.webp",
+    "tvZonePage": "https://www.tvzonehd.com/disney-channel/"
+  },
+  {
+    "id": "tvzone:minimax",
+    "name": "Minimax",
+    "category": "copii",
+    "logo": "https://www.tvzonehd.com/img/minimax.webp",
+    "tvZonePage": "https://www.tvzonehd.com/minimax/"
+  },
+  {
+    "id": "tvzone:mtv",
+    "name": "MTV Europe",
+    "category": "muzica",
+    "logo": "https://www.tvzonehd.com/img/mtv.webp",
+    "tvZonePage": "https://www.tvzonehd.com/mtv-80/"
+  },
+  {
+    "id": "tvzone:tvr1",
+    "name": "TVR 1",
+    "category": "generaliste",
+    "logo": "https://www.tvzonehd.com/img/Tvr1FHD.webp",
+    "tvZonePage": "https://www.tvzonehd.com/tvr-1/"
+  },
+  {
+    "id": "tvzone:national24",
+    "name": "National 24 Plus",
+    "category": "generaliste",
+    "logo": "https://www.tvzonehd.com/img/national24_plus.webp",
+    "tvZonePage": "https://www.tvzonehd.com/national-24-plus/"
+  },
+  {
+    "id": "tvzone:realitatea",
+    "name": "Realitatea Plus",
+    "category": "stiri",
+    "logo": "https://www.tvzonehd.com/img/realitatea.webp",
+    "tvZonePage": "https://www.tvzonehd.com/realitatea-plus/"
+  },
+  {
+    "id": "tvzone:kisstv",
+    "name": "Kiss TV",
+    "category": "muzica",
+    "logo": "https://www.tvzonehd.com/img/kisstv.webp",
+    "tvZonePage": "https://www.tvzonehd.com/kiss-tv/"
+  },
+  {
+    "id": "tvzone:mezzo",
+    "name": "Mezzo",
+    "category": "muzica",
+    "logo": "https://www.tvzonehd.com/img/mezzo-pink-logo-png_seeklogo-328020 (1).webp",
+    "tvZonePage": "https://www.tvzonehd.com/mezzo/"
+  },
+  {
+    "id": "tvzone:eurosport1",
+    "name": "Eurosport 1",
+    "category": "sport",
+    "logo": "https://www.tvzonehd.com/img/eurosport1.webp",
+    "tvZonePage": "https://www.tvzonehd.com/eurosport-1/"
+  },
+  {
+    "id": "tvzone:proarena",
+    "name": "Pro Arena",
+    "category": "sport",
+    "logo": "https://www.tvzonehd.com/img/PRO-ARENA-FHD.webp",
+    "tvZonePage": "https://www.tvzonehd.com/pro-arena/"
+  },
+  {
+    "id": "tvzone:natgeo",
+    "name": "National Geographic",
+    "category": "documentare",
+    "logo": "https://www.tvzonehd.com/img/natgeoo.webp",
+    "tvZonePage": "https://www.tvzonehd.com/national-geographic/"
+  },
+  {
+    "id": "tvzone:animalplanet",
+    "name": "Animal Planet",
+    "category": "documentare",
+    "logo": "https://www.tvzonehd.com/img/animalplanet.webp",
+    "tvZonePage": "https://www.tvzonehd.com/animal-planet/"
+  },
+  {
+    "id": "tvzone:discovery",
+    "name": "Discovery Channel",
+    "category": "documentare",
+    "logo": "https://www.tvzonehd.com/img/dicov.webp",
+    "tvZonePage": "https://www.tvzonehd.com/discovery-channel/"
+  },
+  {
+    "id": "tvzone:tvrinternational",
+    "name": "TVR International",
+    "category": "generaliste",
+    "logo": "https://www.tvzonehd.com/img/tvrin.webp",
+    "tvZonePage": "https://www.tvzonehd.com/tvr-international/"
+  },
+  {
+    "id": "tvzone:favorittv",
+    "name": "Favorit TV",
+    "category": "muzica",
+    "logo": "https://www.tvzonehd.com/img/Facorit.webp",
+    "tvZonePage": "https://www.tvzonehd.com/favorit-tv/"
+  },
+  {
+    "id": "tvzone:antena3",
+    "name": "Antena 3 CNN",
+    "category": "stiri",
+    "logo": "https://www.tvzonehd.com/img/Antena3cnn.webp",
+    "tvZonePage": "https://www.tvzonehd.com/antena-3-cnn/"
+  },
+  {
+    "id": "tvzone:warnertv",
+    "name": "Warner TV",
+    "category": "filme",
+    "logo": "https://www.tvzonehd.com/img/warnertv.webp",
+    "tvZonePage": "https://www.tvzonehd.com/warner-tv/"
+  },
+  {
+    "id": "tvzone:viasatexplore",
+    "name": "Viasat Explore",
+    "category": "documentare",
+    "logo": "https://www.tvzonehd.com/img/viasatexplore.webp",
+    "tvZonePage": "https://www.tvzonehd.com/viasat-explore/"
+  },
+  {
+    "id": "tvzone:viasathistory",
+    "name": "Viasat History",
+    "category": "documentare",
+    "logo": "https://www.tvzonehd.com/img/viasathistory.webp",
+    "tvZonePage": "https://www.tvzonehd.com/viasat-history/"
+  },
+  {
+    "id": "tvzone:viasatkino",
+    "name": "Viasat Kino",
+    "category": "filme",
+    "logo": "https://www.tvzonehd.com/img/viasatkino.webp",
+    "tvZonePage": "https://www.tvzonehd.com/viasat-kino/"
+  },
+  {
+    "id": "tvzone:happychannel",
+    "name": "Happy Channel",
+    "category": "generaliste",
+    "logo": "https://www.tvzonehd.com/img/happytv.webp",
+    "tvZonePage": "https://www.tvzonehd.com/happy/"
+  },
+  {
+    "id": "tvzone:kanald",
+    "name": "Kanal D",
+    "category": "generaliste",
+    "logo": "https://www.tvzonehd.com/img/kanald.webp",
+    "tvZonePage": "https://www.tvzonehd.com/kanal-d/"
+  },
+  {
+    "id": "tvzone:antenastars",
+    "name": "Antena Stars",
+    "category": "generaliste",
+    "logo": "https://www.tvzonehd.com/img/Stars.webp",
+    "tvZonePage": "https://www.tvzonehd.com/antena-stars/"
+  },
+  {
+    "id": "tvzone:antenaint",
+    "name": "Antena International",
+    "category": "generaliste",
+    "logo": "https://www.tvzonehd.com/img/antenaint.webp",
+    "tvZonePage": "https://www.tvzonehd.com/antena-international/"
+  },
+  {
+    "id": "tvzone:axnwhite",
+    "name": "AXN White",
+    "category": "filme",
+    "logo": "https://www.tvzonehd.com/img/AxnWithe.webp",
+    "tvZonePage": "https://www.tvzonehd.com/axn-white/"
+  },
+  {
+    "id": "tvzone:axnblack",
+    "name": "AXN Black",
+    "category": "filme",
+    "logo": "https://www.tvzonehd.com/img/axnBl.webp",
+    "tvZonePage": "https://www.tvzonehd.com/axn-black/"
+  },
+  {
+    "id": "tvzone:cartoonito",
+    "name": "Cartoonito",
+    "category": "copii",
+    "logo": "https://www.tvzonehd.com/img/cartoonito.webp",
+    "tvZonePage": "https://www.tvzonehd.com/cartoonito/"
+  },
+  {
+    "id": "tvzone:cartoonnetwork",
+    "name": "Cartoon Network",
+    "category": "copii",
+    "logo": "https://www.tvzonehd.com/img/cartoonnetwork.webp",
+    "tvZonePage": "https://www.tvzonehd.com/cartoon-network/"
+  },
+  {
+    "id": "tvzone:kanald2",
+    "name": "Kanal D2",
+    "category": "generaliste",
+    "logo": "https://www.tvzonehd.com/img/kanald2.webp",
+    "tvZonePage": "https://www.tvzonehd.com/kanal-d2/"
+  },
+  {
+    "id": "tvzone:primacomedy",
+    "name": "Prima Comedy",
+    "category": "generaliste",
+    "logo": "https://www.tvzonehd.com/img/primacomedy.webp",
+    "tvZonePage": "https://www.tvzonehd.com/prima-comedy/"
+  },
+  {
+    "id": "tvzone:acasagold",
+    "name": "Acasa Gold",
+    "category": "generaliste",
+    "logo": "https://www.tvzonehd.com/img/acasaagold.webp",
+    "tvZonePage": "https://www.tvzonehd.com/acasa-gold/"
+  },
+  {
+    "id": "tvzone:dizi",
+    "name": "Dizi",
+    "category": "generaliste",
+    "logo": "https://www.tvzonehd.com/img/dizi.webp",
+    "tvZonePage": "https://www.tvzonehd.com/dizi/"
+  },
+  {
+    "id": "tvzone:tvr3",
+    "name": "TVR 3",
+    "category": "generaliste",
+    "logo": "https://www.tvzonehd.com/img/tvr33.webp",
+    "tvZonePage": "https://www.tvzonehd.com/tvr-3/"
+  },
+  {
+    "id": "tvzone:tvrcultural",
+    "name": "TVR Cultural",
+    "category": "generaliste",
+    "logo": "https://www.tvzonehd.com/img/TvrCult.webp",
+    "tvZonePage": "https://www.tvzonehd.com/tvr-cultural/"
+  },
+  {
+    "id": "tvzone:digisport1",
+    "name": "Digi Sport 1",
+    "category": "sport",
+    "logo": "https://www.tvzonehd.com/img/digg1.webp",
+    "tvZonePage": "https://www.tvzonehd.com/digi-sport-1/"
+  },
+  {
+    "id": "tvzone:digisport2",
+    "name": "Digi Sport 2",
+    "category": "sport",
+    "logo": "https://www.tvzonehd.com/img/DigiSportt2.webp",
+    "tvZonePage": "https://www.tvzonehd.com/digi-sport-2/"
+  },
+  {
+    "id": "tvzone:digisport3",
+    "name": "Digi Sport 3",
+    "category": "sport",
+    "logo": "https://www.tvzonehd.com/img/DigISport3.webp",
+    "tvZonePage": "https://www.tvzonehd.com/digi-sport-3/"
+  },
+  {
+    "id": "tvzone:digisport4",
+    "name": "Digi Sport 4",
+    "category": "sport",
+    "logo": "https://www.tvzonehd.com/img/DigISport4.webp",
+    "tvZonePage": "https://www.tvzonehd.com/digi-sport-4/"
+  },
+  {
+    "id": "tvzone:primasport1",
+    "name": "Prima Sport 1",
+    "category": "sport",
+    "logo": "https://www.tvzonehd.com/img/PrimaSp1.webp",
+    "tvZonePage": "https://www.tvzonehd.com/prima-sport-2/"
+  },
+  {
+    "id": "tvzone:primasport2",
+    "name": "Prima Sport 2",
+    "category": "sport",
+    "logo": "https://www.tvzonehd.com/img/Primasp2.webp",
+    "tvZonePage": "https://www.tvzonehd.com/prima-sport-1/"
+  },
+  {
+    "id": "tvzone:primasport3",
+    "name": "Prima Sport 3",
+    "category": "sport",
+    "logo": "https://www.tvzonehd.com/img/PrimaSp3.webp",
+    "tvZonePage": "https://www.tvzonehd.com/prima-sport-3/"
+  },
+  {
+    "id": "tvzone:primasport4",
+    "name": "Prima Sport 4",
+    "category": "sport",
+    "logo": "https://www.tvzonehd.com/img/PrimaSp4.webp",
+    "tvZonePage": "https://www.tvzonehd.com/prima-sport-4/"
+  },
+  {
+    "id": "tvzone:primasport5",
+    "name": "Prima Sport 5",
+    "category": "sport",
+    "logo": "https://www.tvzonehd.com/img/Primasp5.webp",
+    "tvZonePage": "https://www.tvzonehd.com/prima-sport-5/"
+  },
+  {
+    "id": "tvzone:ppv1",
+    "name": "PPV 1",
+    "category": "sport",
+    "logo": "https://www.tvzonehd.com/img/ppv1.webp",
+    "tvZonePage": "https://www.tvzonehd.com/ppv-1/"
+  },
+  {
+    "id": "tvzone:ppv2",
+    "name": "PPV 2",
+    "category": "sport",
+    "logo": "https://www.tvzonehd.com/img/ppv2.webp",
+    "tvZonePage": "https://www.tvzonehd.com/ppv-2/"
+  },
+  {
+    "id": "tvzone:ppv3",
+    "name": "PPV 3",
+    "category": "sport",
+    "logo": "https://www.tvzonehd.com/img/ppv3.webp",
+    "tvZonePage": "https://www.tvzonehd.com/ppv-3/"
+  },
+  {
+    "id": "tvzone:tvrsport",
+    "name": "TVR Sport",
+    "category": "sport",
+    "logo": "https://www.tvzonehd.com/img/TvrSp.webp",
+    "tvZonePage": "https://www.tvzonehd.com/tvr-sport/"
+  },
+  {
+    "id": "tvzone:realitatasportiva",
+    "name": "Realitatea Sportiva",
+    "category": "sport",
+    "logo": "https://www.tvzonehd.com/img/realitatasportiva.webp",
+    "tvZonePage": "https://www.tvzonehd.com/realitatea-sportiva/"
+  },
+  {
+    "id": "tvzone:sportextra",
+    "name": "Sport Extra",
+    "category": "sport",
+    "logo": "https://www.tvzonehd.com/img/sportextra.webp",
+    "tvZonePage": "https://www.tvzonehd.com/sport-extra/"
+  },
+  {
+    "id": "tvzone:eurosport2",
+    "name": "Eurosport 2",
+    "category": "sport",
+    "logo": "https://www.tvzonehd.com/img/eurosport2.webp",
+    "tvZonePage": "https://www.tvzonehd.com/eurosport-2/"
+  },
+  {
+    "id": "tvzone:hbo2",
+    "name": "HBO 2",
+    "category": "filme",
+    "logo": "https://www.tvzonehd.com/img/HbO2.webp",
+    "tvZonePage": "https://www.tvzonehd.com/hbo-2/"
+  },
+  {
+    "id": "tvzone:hbo3",
+    "name": "HBO 3",
+    "category": "filme",
+    "logo": "https://www.tvzonehd.com/img/HbO3.webp",
+    "tvZonePage": "https://www.tvzonehd.com/hbo-3/"
+  },
+  {
+    "id": "tvzone:skyshowtime1",
+    "name": "Sky Showtime 1",
+    "category": "filme",
+    "logo": "https://www.tvzonehd.com/img/skyshowtime1.webp",
+    "tvZonePage": "https://www.tvzonehd.com/skyshowtime1/"
+  },
+  {
+    "id": "tvzone:skyshowtime2",
+    "name": "Sky Showtime 2",
+    "category": "filme",
+    "logo": "https://www.tvzonehd.com/img/skyshowtime2.webp",
+    "tvZonePage": "https://www.tvzonehd.com/skyshowtime-2/"
+  },
+  {
+    "id": "tvzone:rofilme",
+    "name": "Rofilme",
+    "category": "filme",
+    "logo": "https://www.tvzonehd.com/img/rofilme.webp",
+    "tvZonePage": "https://www.tvzonehd.com/rofilme/"
+  },
+  {
+    "id": "tvzone:cinemax2",
+    "name": "Cinemax 2",
+    "category": "filme",
+    "logo": "https://www.tvzonehd.com/img/cinemax2.webp",
+    "tvZonePage": "https://www.tvzonehd.com/cinemax-2/"
+  },
+  {
+    "id": "tvzone:bbcfirst",
+    "name": "BBC First",
+    "category": "filme",
+    "logo": "https://www.tvzonehd.com/img/bbcfirst.webp",
+    "tvZonePage": "https://www.tvzonehd.com/bbc-first/"
+  },
+  {
+    "id": "tvzone:amc",
+    "name": "AMC",
+    "category": "filme",
+    "logo": "https://www.tvzonehd.com/img/amc.webp",
+    "tvZonePage": "https://www.tvzonehd.com/amc/"
+  },
+  {
+    "id": "tvzone:filmnow",
+    "name": "Film Now",
+    "category": "filme",
+    "logo": "https://www.tvzonehd.com/img/ffILM.webp",
+    "tvZonePage": "https://www.tvzonehd.com/filmnow/"
+  },
+  {
+    "id": "tvzone:nostalgia",
+    "name": "Nostalgia",
+    "category": "filme",
+    "logo": "https://www.tvzonehd.com/img/Nostalg.webp",
+    "tvZonePage": "https://www.tvzonehd.com/nostalgia-tv/"
+  },
+  {
+    "id": "tvzone:filmbox",
+    "name": "FilmBox One",
+    "category": "filme",
+    "logo": "https://www.tvzonehd.com/img/filmboxone.webp",
+    "tvZonePage": "https://www.tvzonehd.com/film-box/"
+  },
+  {
+    "id": "tvzone:filmboxplus",
+    "name": "FilmBox Emotion",
+    "category": "filme",
+    "logo": "https://www.tvzonehd.com/img/FilmboxEmotion011.webp",
+    "tvZonePage": "https://www.tvzonehd.com/film-box-plus/"
+  },
+  {
+    "id": "tvzone:filmboxpremium",
+    "name": "FilmBox Hits",
+    "category": "filme",
+    "logo": "https://www.tvzonehd.com/img/FilmBoxHits.webp",
+    "tvZonePage": "https://www.tvzonehd.com/film-box-premium/"
+  },
+  {
+    "id": "tvzone:axnspin",
+    "name": "AXN Spin",
+    "category": "filme",
+    "logo": "https://www.tvzonehd.com/img/axnspin.webp",
+    "tvZonePage": "https://www.tvzonehd.com/axn-spin/"
+  },
+  {
+    "id": "tvzone:epicdrama",
+    "name": "Epic Drama",
+    "category": "filme",
+    "logo": "https://www.tvzonehd.com/img/epicdrama.webp",
+    "tvZonePage": "https://www.tvzonehd.com/epic-drama/"
+  },
+  {
+    "id": "tvzone:comedycentral",
+    "name": "Comedy Central",
+    "category": "filme",
+    "logo": "https://www.tvzonehd.com/img/comedycentral.webp",
+    "tvZonePage": "https://www.tvzonehd.com/comedy-central/"
+  },
+  {
+    "id": "tvzone:cinemaraton",
+    "name": "Cinemaraton",
+    "category": "filme",
+    "logo": "https://www.tvzonehd.com/img/cinemaraton.webp",
+    "tvZonePage": "https://www.tvzonehd.com/cinemaraton/"
+  },
+  {
+    "id": "tvzone:bollywoodtv",
+    "name": "Bollywood TV",
+    "category": "filme",
+    "logo": "https://www.tvzonehd.com/img/bollywoodtv.webp",
+    "tvZonePage": "https://www.tvzonehd.com/bollywood-tv/"
+  },
+  {
+    "id": "tvzone:filmcafe",
+    "name": "Film Cafe",
+    "category": "filme",
+    "logo": "https://www.tvzonehd.com/img/filmcafe.webp",
+    "tvZonePage": "https://www.tvzonehd.com/film-cafe/"
+  },
+  {
+    "id": "tvzone:cinewow",
+    "name": "CineWow",
+    "category": "filme",
+    "logo": "https://www.tvzonehd.com/img/cinewow.webp",
+    "tvZonePage": "https://www.tvzonehd.com/cinewow/"
+  },
+  {
+    "id": "tvzone:filmmania",
+    "name": "Film Mania",
+    "category": "filme",
+    "logo": "https://www.tvzonehd.com/img/FilmMANIA.webp",
+    "tvZonePage": "https://www.tvzonehd.com/film-mania/"
+  },
+  {
+    "id": "tvzone:crimeinvestigation",
+    "name": "Crime & Investigation",
+    "category": "documentare",
+    "logo": "https://www.tvzonehd.com/img/crimeinvestigation.webp",
+    "tvZonePage": "https://www.tvzonehd.com/crime-investigation/"
+  },
+  {
+    "id": "tvzone:idinvestigation",
+    "name": "ID Investigation Discovery",
+    "category": "documentare",
+    "logo": "https://www.tvzonehd.com/img/IDinv.webp",
+    "tvZonePage": "https://www.tvzonehd.com/id-investigation/"
+  },
+  {
+    "id": "tvzone:natgeowild",
+    "name": "National Geographic Wild",
+    "category": "documentare",
+    "logo": "https://www.tvzonehd.com/img/NatGeooW.webp",
+    "tvZonePage": "https://www.tvzonehd.com/national-geographic-wild/"
+  },
+  {
+    "id": "tvzone:viasatnature",
+    "name": "Viasat Nature",
+    "category": "documentare",
+    "logo": "https://www.tvzonehd.com/img/viasatnature.webp",
+    "tvZonePage": "https://www.tvzonehd.com/viasat-nature/"
+  },
+  {
+    "id": "tvzone:descoperaacum",
+    "name": "Descopera Acum",
+    "category": "documentare",
+    "logo": "https://www.tvzonehd.com/img/descoperaacum.webp",
+    "tvZonePage": "https://www.tvzonehd.com/descopera/"
+  },
+  {
+    "id": "tvzone:lovenature",
+    "name": "Love Nature",
+    "category": "documentare",
+    "logo": "https://www.tvzonehd.com/img/LoveNNature.webp",
+    "tvZonePage": "https://www.tvzonehd.com/lovenature/"
+  },
+  {
+    "id": "tvzone:historychannel",
+    "name": "History Channel",
+    "category": "documentare",
+    "logo": "https://www.tvzonehd.com/img/historychannel.webp",
+    "tvZonePage": "https://www.tvzonehd.com/history-channel/"
+  },
+  {
+    "id": "tvzone:hgtv",
+    "name": "HGTV",
+    "category": "documentare",
+    "logo": "https://www.tvzonehd.com/img/hgtv.webp",
+    "tvZonePage": "https://www.tvzonehd.com/hgtv/"
+  },
+  {
+    "id": "tvzone:bbcearth",
+    "name": "BBC Earth",
+    "category": "documentare",
+    "logo": "https://www.tvzonehd.com/img/BBC.webp",
+    "tvZonePage": "https://www.tvzonehd.com/bbc-earth/"
+  },
+  {
+    "id": "tvzone:fishinghunting",
+    "name": "Fishing & Hunting",
+    "category": "documentare",
+    "logo": "https://www.tvzonehd.com/img/fishinghunting.webp",
+    "tvZonePage": "https://www.tvzonehd.com/fishing-hunting/"
+  },
+  {
+    "id": "tvzone:tlc",
+    "name": "TLC",
+    "category": "documentare",
+    "logo": "https://www.tvzonehd.com/img/tlc.webp",
+    "tvZonePage": "https://www.tvzonehd.com/tlc/"
+  },
+  {
+    "id": "tvzone:digianimalworld",
+    "name": "Digi Animal World",
+    "category": "documentare",
+    "logo": "https://www.tvzonehd.com/img/DigiAni.webp",
+    "tvZonePage": "https://www.tvzonehd.com/digi-animal-world/"
+  },
+  {
+    "id": "tvzone:romaniatv",
+    "name": "Romania TV",
+    "category": "stiri",
+    "logo": "https://www.tvzonehd.com/img/RomaniaTVV.webp",
+    "tvZonePage": "https://www.tvzonehd.com/romania-tv/"
+  },
+  {
+    "id": "tvzone:euronews",
+    "name": "Euronews",
+    "category": "stiri",
+    "logo": "https://www.tvzonehd.com/img/Euronew.webp",
+    "tvZonePage": "https://www.tvzonehd.com/euro-news/"
+  },
+  {
+    "id": "tvzone:digi24",
+    "name": "Digi 24",
+    "category": "stiri",
+    "logo": "https://www.tvzonehd.com/img/digi24.webp",
+    "tvZonePage": "https://www.tvzonehd.com/digi24/"
+  },
+  {
+    "id": "tvzone:realitatastar",
+    "name": "Realitatea Star",
+    "category": "stiri",
+    "logo": "https://www.tvzonehd.com/img/REALS.webp",
+    "tvZonePage": "https://www.tvzonehd.com/realitatea-star/"
+  },
+  {
+    "id": "tvzone:primanews",
+    "name": "Prima News",
+    "category": "stiri",
+    "logo": "https://www.tvzonehd.com/img/primanews.webp",
+    "tvZonePage": "https://www.tvzonehd.com/prima-news/"
+  },
+  {
+    "id": "tvzone:nasultv",
+    "name": "Nasul TV",
+    "category": "stiri",
+    "logo": "https://www.tvzonehd.com/img/nasultv.webp",
+    "tvZonePage": "https://www.tvzonehd.com/nasul-tv/"
+  },
+  {
+    "id": "tvzone:zutv",
+    "name": "Zu TV",
+    "category": "muzica",
+    "logo": "https://www.tvzonehd.com/img/zutv.webp",
+    "tvZonePage": "https://www.tvzonehd.com/zu-tv/"
+  },
+  {
+    "id": "tvzone:atomic",
+    "name": "Atomic TV",
+    "category": "muzica",
+    "logo": "https://www.tvzonehd.com/img/atomic.webp",
+    "tvZonePage": "https://www.tvzonehd.com/atomic/"
+  },
+  {
+    "id": "tvzone:impactmanele",
+    "name": "Impact Manele",
+    "category": "muzica",
+    "logo": "https://www.tvzonehd.com/img/impactmanele.webp",
+    "tvZonePage": "https://www.tvzonehd.com/impact-manele/"
+  },
+  {
+    "id": "tvzone:impactdance",
+    "name": "Impact Dance",
+    "category": "muzica",
+    "logo": "https://www.tvzonehd.com/img/impactdance.webp",
+    "tvZonePage": "https://www.tvzonehd.com/impact-dance/"
+  },
+  {
+    "id": "tvzone:magictv",
+    "name": "Magic TV",
+    "category": "muzica",
+    "logo": "https://www.tvzonehd.com/img/magictv.webp",
+    "tvZonePage": "https://www.tvzonehd.com/magic-tv/"
+  },
+  {
+    "id": "tvzone:taraftv",
+    "name": "Taraf TV",
+    "category": "muzica",
+    "logo": "https://www.tvzonehd.com/img/taraftv.webp",
+    "tvZonePage": "https://www.tvzonehd.com/taraf-tv/"
+  },
+  {
+    "id": "tvzone:etnotv",
+    "name": "Etno TV",
+    "category": "muzica",
+    "logo": "https://www.tvzonehd.com/img/etnotv.webp",
+    "tvZonePage": "https://www.tvzonehd.com/etno-tv/"
+  },
+  {
+    "id": "tvzone:balcantv",
+    "name": "Balcan TV",
+    "category": "muzica",
+    "logo": "https://www.tvzonehd.com/img/balcantv.webp",
+    "tvZonePage": "https://www.tvzonehd.com/balcan-tv/"
+  },
+  {
+    "id": "tvzone:boomtv",
+    "name": "Boom TV",
+    "category": "muzica",
+    "logo": "https://www.tvzonehd.com/img/boomtv.webp",
+    "tvZonePage": "https://www.tvzonehd.com/boomtv/"
+  },
+  {
+    "id": "tvzone:traditionaltv",
+    "name": "Traditional TV",
+    "category": "muzica",
+    "logo": "https://www.tvzonehd.com/img/traditionaltv.webp",
+    "tvZonePage": "https://www.tvzonehd.com/traditional-tv/"
+  },
+  {
+    "id": "tvzone:partimix",
+    "name": "Parti Mix",
+    "category": "muzica",
+    "logo": "https://www.tvzonehd.com/img/partimix.webp",
+    "tvZonePage": "https://www.tvzonehd.com/parti-mix/"
+  },
+  {
+    "id": "tvzone:nickelodeon",
+    "name": "Nickelodeon",
+    "category": "copii",
+    "logo": "https://www.tvzonehd.com/img/nickelodeon.webp",
+    "tvZonePage": "https://www.tvzonehd.com/nickelodeon/"
+  },
+  {
+    "id": "tvzone:ducktv",
+    "name": "Duck TV",
+    "category": "copii",
+    "logo": "https://www.tvzonehd.com/img/ducktv.webp",
+    "tvZonePage": "https://www.tvzonehd.com/duck-tv/"
+  },
+  {
+    "id": "tvzone:jimjam",
+    "name": "Jim Jam",
+    "category": "copii",
+    "logo": "https://www.tvzonehd.com/img/jimjam.webp",
+    "tvZonePage": "https://www.tvzonehd.com/jimjam/"
+  },
+  {
+    "id": "tvzone:nickjr",
+    "name": "Nick Jr",
+    "category": "copii",
+    "logo": "https://www.tvzonehd.com/img/nickjr.webp",
+    "tvZonePage": "https://www.tvzonehd.com/nick-jr/"
+  },
+  {
+    "id": "tvzone:nicktoons",
+    "name": "Nicktoons",
+    "category": "copii",
+    "logo": "https://www.tvzonehd.com/img/nicktoons.webp",
+    "tvZonePage": "https://www.tvzonehd.com/nicktoons/"
+  },
+  {
+    "id": "tvzone:disneyjunior",
+    "name": "Disney Junior",
+    "category": "copii",
+    "logo": "https://www.tvzonehd.com/img/disneyjunior.webp",
+    "tvZonePage": "https://www.tvzonehd.com/disney-junior/"
+  },
+  {
+    "id": "tvzone:tralala",
+    "name": "TraLaLa",
+    "category": "copii",
+    "logo": "https://www.tvzonehd.com/img/tralala.webp",
+    "tvZonePage": "https://www.tvzonehd.com/tralala/"
+  },
+  {
+    "id": "tvzone:tomandjerry",
+    "name": "Tom and Jerry",
+    "category": "copii",
+    "logo": "https://www.tvzonehd.com/img/tomandjerry.webp",
+    "tvZonePage": "https://www.tvzonehd.com/tom/"
+  },
+  {
+    "id": "tvzone:angeliustv",
+    "name": "Angelius TV",
+    "category": "religioase",
+    "logo": "https://www.tvzonehd.com/img/angeliustv.webp",
+    "tvZonePage": "https://www.tvzonehd.com/angelus-tv/"
+  },
+  {
+    "id": "tvzone:credotv",
+    "name": "Credo TV",
+    "category": "religioase",
+    "logo": "https://www.tvzonehd.com/img/credotv.webp",
+    "tvZonePage": "https://www.tvzonehd.com/credo-tv/"
+  },
+  {
+    "id": "tvzone:sperantatv",
+    "name": "Speranta TV",
+    "category": "religioase",
+    "logo": "https://www.tvzonehd.com/img/sperantatv.webp",
+    "tvZonePage": "https://www.tvzonehd.com/speranta-tv/"
+  },
+  {
+    "id": "tvzone:trinitastv",
+    "name": "Trinitas TV",
+    "category": "religioase",
+    "logo": "https://www.tvzonehd.com/img/trinitastv.webp",
+    "tvZonePage": "https://www.tvzonehd.com/trinitas-tv/"
+  }
+]

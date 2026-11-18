@@ -1,20 +1,14 @@
-# OME Live Test — Antena Live
+# OME Live – codul original Java
 
-Independent Android diagnostic APK built with Kotlin and Media3 1.11.1. It does **not** access or bypass protected streams: the user opens the provider site, performs any required interaction, and then explicitly selects a media request for playback. The site must permit playback.
+Proiect construit în jurul fișierului `RdsLiveActivity.java` furnizat de utilizator. Fișierul este copiat **identic** (SHA-256 poate fi comparat). Nu se folosesc `MainActivity.kt` sau UI-ul din fostul `ome-live-test`.
 
-## On a phone: build with GitHub Actions
+- RDSLive: folosește `assets/rdslive-session.js` din APK-ul original și ciclul de sesiune din clasa Java.
+- Canale: liste din APK (`rdslive-channels.json`, `tvzone-channels.json`).
+- TVZone: adaptorul `TvZoneResolver` este **minimal**; extrage numai un URL media publicat în HTML și nu reproduce integral resolverul compilat din APK.
+- IPTV-org: adaptor minimal pentru catalog; nu adaugă surse inventate.
+- Configurația `APPLICATION_ID` are sufixul `.rdslivetest` pentru testul Antena din codul Java.
 
-1. Create an empty repository `ome-live-test` on GitHub (choose **no README** initially).
-2. Upload **the contents** of this project to the repository, preserving `.github/workflows/android.yml`. The GitHub web uploader may not expose dotfolders on some mobile browsers; desktop mode helps.
-3. Open **Actions → Build Android APK → Run workflow**, or push to `main` to trigger the workflow.
-4. After success, open the workflow run → **Artifacts → OME-Live-Test-debug-APK**. Unzip and install `app-debug.apk` on your Android phone.
+**Limitare importantă:** adaptările claselor lipsă nu sunt echivalente cu codul original compilat în APK. Nu există garanție că un token RDSLive va funcționa în Media3 sau că TVZone va furniza sursa.
 
-## Diagnostic steps
-
-1. Tap **Open Antena Live**; the WebView is visible and has a real size. Interact with the website directly and complete any required prompts.
-2. When the page requests HLS/DASH, tap **Choose stream**; multiple requests might include audio-only variants. A manifest URL is not necessarily the main video manifest.
-3. Tap **Play in Media3**. The app passes User-Agent, Referer and cookies from the legitimate WebView session where available.
-4. Observe `audio/video tracks`, `video supported/selected`, `video size`, `first frame`, `HTTP/error`. A READY player without a rendered frame is not considered proof of video.
-5. Tap **Copy diagnostic**. Sensitive URLs, cookies, tokens and request headers are not included in the diagnostic text.
-
-Note: Android WebView may not expose all fetch requests or required headers through `shouldInterceptRequest`; some sites use DRM, nonstandard playlists or session-bound manifests. This app is only a diagnostic. It does not guarantee playback, does not renew provider tokens or bypass session restrictions.
+## Utilizare
+Urcă întregul proiect pe GitHub și compilează cu Actions. La pornire, alege un canal din catalog. APK-ul de debug folosește un ID diferit și nu înlocuiește OME Stream original.
